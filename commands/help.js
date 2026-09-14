@@ -21,6 +21,8 @@ module.exports = {
                     name: 'Trainee Logs',
                     value: [
                         '`/cadets edit` - Update a trainee record with PR, MAIN/ALT.',
+                        '`/fire` - Post a disciplinary firing note in a cadet thread.',
+                        '`/reenlist` - Post a reenlistment note in a cadet thread.',
                         '`/refreshlogs` - Manually import recent invite logs into the cadet forum. Please don\'t use this command unless you are sure there are OLD logs to import.',
                         '`/listcadets` - View cadets with rank, country, and last online information.'
                     ].join('\n')

@@ -13,7 +13,9 @@ module.exports = {
             .setRequired(true)
             .addChoices(
                 { name: 'cadets', value: 'cadets' },
-                { name: 'listcadets', value: 'listcadets' }
+                { name: 'listcadets', value: 'listcadets' },
+                { name: 'fire', value: 'fire' },
+                { name: 'reenlist', value: 'reenlist' }
                 ))
         .addRoleOption(option => option
             .setName('role')
