@@ -23,6 +23,10 @@ function readState() {
 	}
 }
 
+function writeState(state) {
+	fs.writeFileSync(statePath, JSON.stringify(state, null, 2));
+}
+
 function formatDate() {
 	const now = new Date();
 	return `${String(now.getUTCDate()).padStart(2, '0')}.${String(now.getUTCMonth() + 1).padStart(2, '0')}.${now.getUTCFullYear()}`;
@@ -90,7 +94,8 @@ module.exports = {
 		const toName = interaction.options.getString('to_name').trim();
 		const rank = interaction.options.getString('rank').trim();
 		const reason = interaction.options.getString('reason').trim();
-		const entry = Object.values(readState().processed).find(
+		const state = readState();
+		const entry = Object.values(state.processed).find(
 			item => typeof item.name === 'string' && item.name.toLowerCase() === targetName
 		);
 
@@ -105,6 +110,8 @@ module.exports = {
 				content: buildFireNotice({ toName, rank, reason })
 			});
 			await thread.setArchived(true);
+			state.processed[entry.messageId] = { messageId: entry.messageId };
+			writeState(state);
 			return interaction.editReply(`Successfully posted a firing notice for **${entry.name}**.`);
 		} catch (error) {
 			console.error('Failed to post firing notice:', error);
