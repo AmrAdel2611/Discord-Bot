@@ -7,7 +7,7 @@ const { refreshInviteLogs } = require('./cadets');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('refreshlogs')
-        .setDescription('Manually import recent invite logs into the cadet forum. Please don\'t use this command unless you are sure there are OLD logs to import.'),
+        .setDescription('Import old invite logs into the cadet forum.'),
 
     async execute(interaction) {
         const roleId = getCommandRole(interaction.guildId, 'cadets');
