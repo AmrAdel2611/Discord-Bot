@@ -132,6 +132,20 @@ async function sendSetRankMessage(client, guildId, cadetName, rank, serviceNumbe
     await channel.send(`/setrank ${cadetName}${badgePart} ${rank}`);
 }
 
+async function sendAltCadetSetRankMessage(client, guildId, cadetName) {
+    const channelId = getGuildChannel(guildId, 'setrank', setRankChannelId);
+    if (!channelId) {
+        throw new Error('SET_RANK_CHANNEL_ID is not configured in .env.');
+    }
+
+    const channel = await client.channels.fetch(channelId);
+    if (!channel?.isTextBased()) {
+        throw new Error('SET_RANK_CHANNEL_ID must point to a text channel.');
+    }
+
+    await channel.send(`/setrank ${cadetName} [SO] Police Cadet`);
+}
+
 function buildTrainingNotice(toName, rank) {
     const now = new Date();
     const day = String(now.getUTCDate()).padStart(2, '0');
@@ -572,19 +586,18 @@ module.exports = {
                     await thread.send({ content: noticeText });
                 }
 
-                if (accountType === 'Alt') {
-                    await sendSetRankMessage(
+                if (accountType?.toLowerCase() === 'alt') {
+                    await sendAltCadetSetRankMessage(
                         interaction.client,
                         interaction.guildId,
-                        entry.name,
-                        'Police Cadet'
+                        entry.name
                     );
                     entry.isSO = true;
                     writeState(state);
                 }
 
                 return interaction.editReply(
-                    accountType === 'Alt'
+                    accountType?.toLowerCase() === 'alt'
                         ? `Successfully updated forum post for **${entry.name}** and sent the Police Cadet setrank request.`
                         : `Successfully updated forum post for **${entry.name}**.`
                 );

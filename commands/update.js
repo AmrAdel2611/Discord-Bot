@@ -105,7 +105,7 @@ module.exports = {
 
             const messages = await fetchAllMessages(channel);
             const state = readState();
-            const entries = Object.values(state.processed).filter(entry => entry?.messageId);
+            const entries = Object.values(state.processed).filter(entry => entry?.messageId && entry.isSO === true);
             const inviteLogsChannelId = getGuildChannel(
                 interaction.guildId,
                 'inviteLogs',
@@ -116,7 +116,7 @@ module.exports = {
                 : null;
 
             let changed = false;
-            let posted = 0;
+            let verified = 0;
             let missing = 0;
 
             for (const entry of entries) {
@@ -126,17 +126,14 @@ module.exports = {
                     cadetName = getCadetNameFromInvite(inviteMessage) || '';
                 }
 
-                const isSO = cadetName.length > 0
+                const isPosted = cadetName.length > 0
                     && [...messages.values()].some(message => isSetRankPost(message, cadetName));
-                if (entry.isSO !== isSO) {
-                    entry.isSO = isSO;
+                if (!isPosted) {
+                    entry.isSO = false;
                     changed = true;
-                }
-
-                if (isSO) {
-                    posted += 1;
-                } else {
                     missing += 1;
+                } else {
+                    verified += 1;
                 }
             }
 
@@ -145,8 +142,8 @@ module.exports = {
             }
 
             return interaction.editReply([
-                `Invite records checked: **${entries.length}**.`,
-                `Setrank posts found: **${posted}**.`,
+                `Records marked [1misSO: true[0m checked: **${entries.length}**.`,
+                `Setrank posts verified: **${verified}**.`,
                 `Setrank posts missing: **${missing}**.`,
                 changed ? 'Updated `isSO` values in `invite_logs.json`.' : 'All `isSO` values were already correct.'
             ].join('\n'));
