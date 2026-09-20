@@ -24,6 +24,11 @@ function readState() {
 
         let changed = false;
         for (const entry of Object.values(normalizedState.processed)) {
+            if (typeof entry.isSO !== 'boolean') {
+                entry.isSO = false;
+                changed = true;
+            }
+
             if (Object.keys(entry).length === 1 && entry.messageId) {
                 continue;
             }
@@ -34,6 +39,10 @@ function readState() {
             }
             if (!entry.ctoExam) {
                 entry.ctoExam = 'TBD';
+                changed = true;
+            }
+            if (!entry.accountType) {
+                entry.accountType = 'Main';
                 changed = true;
             }
         }
@@ -73,6 +82,8 @@ function parseInviteLog(message) {
         name: nameMatch[1].trim(),
         invitedBy: invitedByMatch[1].trim(),
         date: formattedDate,
+        accountType: 'Main',
+        isSO: false,
         trainings: 'TBD',
         ctoExam: 'TBD'
     };
@@ -81,11 +92,11 @@ function parseInviteLog(message) {
 function buildInvitePost(invite) {
     return [
         `Date of Invite: ${invite.date}`,
-        `Training Officer: ${invite.invitedBy}`,
+        `Invited By: ${invite.invitedBy}`,
         `PR: ${invite.pr || 'TBA'}`,
         `Main or Alt: ${invite.accountType || ''}`,
         `If alt, main: ${invite.mainUcp || (invite.accountType === 'Main' ? invite.ucp || '' : '')}`,
-        `Trainings: ${invite.trainings || 'TBD'}`,
+        `Trainings: ${invite.trainings || 'None'}`,
         `CTO Exam: ${invite.ctoExam || 'TBD'}`
     ].join('\n');
 }
@@ -95,7 +106,18 @@ function formatStatusDate() {
     return `${String(now.getUTCDate()).padStart(2, '0')}.${String(now.getUTCMonth() + 1).padStart(2, '0')}.${now.getUTCFullYear()}`;
 }
 
-async function sendSetRankMessage(client, guildId, cadetName, badge) {
+function formatServiceNumber(badge, accountType) {
+    const serviceNumber = badge.trim();
+    if (accountType !== 'Alt') {
+        return serviceNumber.replace(/^SO-/i, '');
+    }
+
+    return serviceNumber.toUpperCase().startsWith('SO-')
+        ? serviceNumber
+        : `SO-${serviceNumber}`;
+}
+
+async function sendSetRankMessage(client, guildId, cadetName, rank, serviceNumber = '', accountType) {
     const channelId = getGuildChannel(guildId, 'setrank', setRankChannelId);
     if (!channelId) {
         throw new Error('SET_RANK_CHANNEL_ID is not configured in .env.');
@@ -106,7 +128,8 @@ async function sendSetRankMessage(client, guildId, cadetName, badge) {
         throw new Error('SET_RANK_CHANNEL_ID must point to a text channel.');
     }
 
-    await channel.send(`/setrank ${cadetName} [${badge}] Police Officer I`);
+    const badgePart = serviceNumber ? ` [${formatServiceNumber(serviceNumber, accountType)}]` : '';
+    await channel.send(`/setrank ${cadetName}${badgePart} ${rank}`);
 }
 
 function buildTrainingNotice(toName, rank) {
@@ -361,7 +384,6 @@ module.exports = {
                 .setDescription('Account classification')
                 .setRequired(false)
                 .addChoices(
-                    { name: 'Main', value: 'Main' },
                     { name: 'Alt', value: 'Alt' }
                 ))
             .addStringOption(opt => opt
@@ -465,8 +487,16 @@ module.exports = {
                 writeState(state);
 
                 if (result === 'Passed') {
-                    await sendSetRankMessage(interaction.client, interaction.guildId, entry.name, badge);
-                    state.processed[entry.messageId] = { messageId: entry.messageId };
+                    await sendSetRankMessage(
+                        interaction.client,
+                        interaction.guildId,
+                        entry.name,
+                        'Police Officer I',
+                        badge,
+                        entry.accountType
+                    );
+                    entry.isSO = true;
+                    state.processed[entry.messageId] = { messageId: entry.messageId, isSO: true };
                     writeState(state);
                     await closePassedCtoThread(thread);
 
@@ -487,7 +517,7 @@ module.exports = {
             await interaction.deferReply({ ephemeral: true });
 
             const targetName = interaction.options.getString('name').trim().toLowerCase();
-            const rank = interaction.options.getString('rank')?.trim() || 'Command Officer';
+            const rank = interaction.options.getString('rank')?.trim() || '';
             const accountType = interaction.options.getString('account_type');
             const pr = interaction.options.getString('pr')?.trim();
             const ucp = interaction.options.getString('ucp')?.trim();
@@ -542,7 +572,22 @@ module.exports = {
                     await thread.send({ content: noticeText });
                 }
 
-                return interaction.editReply(`Successfully updated forum post for **${entry.name}**.`);
+                if (accountType === 'Alt') {
+                    await sendSetRankMessage(
+                        interaction.client,
+                        interaction.guildId,
+                        entry.name,
+                        'Police Cadet'
+                    );
+                    entry.isSO = true;
+                    writeState(state);
+                }
+
+                return interaction.editReply(
+                    accountType === 'Alt'
+                        ? `Successfully updated forum post for **${entry.name}** and sent the Police Cadet setrank request.`
+                        : `Successfully updated forum post for **${entry.name}**.`
+                );
             } catch (error) {
                 console.error('Failed to update forum post:', error);
                 return interaction.editReply(`Error updating forum post: ${error.message}`);
