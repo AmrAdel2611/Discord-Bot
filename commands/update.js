@@ -3,7 +3,7 @@ const path = require('path');
 const { SlashCommandBuilder } = require('discord.js');
 require('dotenv').config();
 
-const { getCommandRole, getGuildChannel } = require('../utils/guildConfig');
+const { getGuildChannel } = require('../utils/guildConfig');
 
 const statePath = path.join(__dirname, '..', 'invite_logs.json');
 const setRankChannelId = process.env.SET_RANK_CHANNEL_ID;
@@ -83,17 +83,9 @@ module.exports = {
         .setDescription('Recheck invite records and setrank requests'),
 
     async execute(interaction) {
-        const roleId = getCommandRole(interaction.guildId, 'cadets');
-        if (!roleId) {
+        if (interaction.user.id !== process.env.BOT_OWNER_ID) {
             return interaction.reply({
-                content: 'The `/cadets` command has not been configured for this server.',
-                ephemeral: true
-            });
-        }
-
-        if (!interaction.member.roles.cache.has(roleId)) {
-            return interaction.reply({
-                content: 'You do not have the role required to use `/update`.',
+                content: 'Only the bot owner can use `/update`.',
                 ephemeral: true
             });
         }
