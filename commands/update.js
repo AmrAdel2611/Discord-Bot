@@ -44,6 +44,14 @@ function isSetRankPost(message, cadetName) {
     ).test(message.content.trim());
 }
 
+function isAltCadetSetRankPost(message, cadetName) {
+    const name = escapeRegExp(cadetName.trim());
+    return new RegExp(
+        `^\\/setrank\\s+${name}\\s+\\[SO\\]\\s+Police Cadet\\s*$`,
+        'i'
+    ).test(message.content.trim());
+}
+
 async function fetchAllMessages(channel) {
     const messages = new Map();
     let before;
@@ -105,7 +113,7 @@ module.exports = {
 
             const messages = await fetchAllMessages(channel);
             const state = readState();
-            const entries = Object.values(state.processed).filter(entry => entry?.messageId && entry.isSO === true);
+            const allEntries = Object.values(state.processed).filter(entry => entry?.messageId);
             const inviteLogsChannelId = getGuildChannel(
                 interaction.guildId,
                 'inviteLogs',
@@ -116,14 +124,45 @@ module.exports = {
                 : null;
 
             let changed = false;
+            let altChecked = 0;
             let verified = 0;
+            let posted = 0;
             let missing = 0;
 
-            for (const entry of entries) {
+            for (const entry of allEntries) {
                 let cadetName = typeof entry.name === 'string' ? entry.name.trim() : '';
                 if (!cadetName && inviteLogsChannel?.messages) {
                     const inviteMessage = await inviteLogsChannel.messages.fetch(entry.messageId).catch(() => null);
                     cadetName = getCadetNameFromInvite(inviteMessage) || '';
+                }
+
+                if (entry.accountType?.toLowerCase() === 'alt') {
+                    altChecked += 1;
+                    const isPosted = cadetName.length > 0
+                        && [...messages.values()].some(message => isAltCadetSetRankPost(message, cadetName));
+
+                    if (!isPosted) {
+                        if (!cadetName) {
+                            missing += 1;
+                            continue;
+                        }
+
+                        await channel.send(`/setrank ${cadetName} [SO] Police Cadet`);
+                        messages.set(`new-${entry.messageId}`, { content: `/setrank ${cadetName} [SO] Police Cadet` });
+                        posted += 1;
+                    } else {
+                        verified += 1;
+                    }
+
+                    if (entry.isSO !== true) {
+                        entry.isSO = true;
+                        changed = true;
+                    }
+                    continue;
+                }
+
+                if (entry.isSO !== true) {
+                    continue;
                 }
 
                 const isPosted = cadetName.length > 0
@@ -142,8 +181,9 @@ module.exports = {
             }
 
             return interaction.editReply([
-                `Records marked [1misSO: true[0m checked: **${entries.length}**.`,
+                `Alt records checked: **${altChecked}**.`,
                 `Setrank posts verified: **${verified}**.`,
+                `Setrank posts created: **${posted}**.`,
                 `Setrank posts missing: **${missing}**.`,
                 changed ? 'Updated `isSO` values in `invite_logs.json`.' : 'All `isSO` values were already correct.'
             ].join('\n'));
