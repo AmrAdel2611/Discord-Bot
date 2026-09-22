@@ -1,14 +1,98 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { getCommandRole } = require('../utils/guildConfig');
+require('dotenv').config();
+
+const { getCommandRole, getGuildChannel } = require('../utils/guildConfig');
 const {
     readState,
     writeState,
-    buildInvitePost,
-    buildCtoNotice,
-    formatStatusDate,
-    sendSetRankMessage,
-    closePassedCtoThread
+    buildInvitePost
 } = require('./cadets');
+
+const setRankChannelId = process.env.SET_RANK_CHANNEL_ID;
+
+function formatStatusDate() {
+    const now = new Date();
+    return `${String(now.getUTCDate()).padStart(2, '0')}.${String(now.getUTCMonth() + 1).padStart(2, '0')}.${now.getUTCFullYear()}`;
+}
+
+function formatServiceNumber(badge, accountType) {
+    const serviceNumber = badge.trim();
+    if (accountType !== 'Alt') {
+        return serviceNumber.replace(/^SO-/i, '');
+    }
+
+    return serviceNumber.toUpperCase().startsWith('SO-')
+        ? serviceNumber
+        : `SO-${serviceNumber}`;
+}
+
+async function sendSetRankMessage(client, guildId, cadetName, rank, serviceNumber = '', accountType) {
+    const channelId = getGuildChannel(guildId, 'setrank', setRankChannelId);
+    if (!channelId) {
+        throw new Error('SET_RANK_CHANNEL_ID is not configured in .env.');
+    }
+
+    const channel = await client.channels.fetch(channelId);
+    if (!channel?.isTextBased()) {
+        throw new Error('SET_RANK_CHANNEL_ID must point to a text channel.');
+    }
+
+    const badgePart = serviceNumber ? ` [${formatServiceNumber(serviceNumber, accountType)}]` : '';
+    await channel.send(`/setrank ${cadetName}${badgePart} ${rank}`);
+}
+
+function buildCtoNotice(toName, rank, badge, result) {
+    const now = new Date();
+    const day = String(now.getUTCDate()).padStart(2, '0');
+    const month = String(now.getUTCMonth() + 1).padStart(2, '0');
+    const year = now.getUTCFullYear();
+    const dateFormatted = `${day}-${month}-${year}`;
+
+    if (result === 'Passed') {
+        return [
+            '```ansi',
+            '\u001b[2;32mPerformance review\u001b[0m',
+            `\u001b[1;2mCO name: ${toName}`,
+            `Rank: ${rank}`,
+            `Date: ${dateFormatted}\u001b[0m`,
+            '',
+            'The results of the performance review:',
+            'AUTOMATED: This employee has been performing above what is expected. The employee has been noted positively and is developing his skills as required.',
+            '',
+            'The employee passed his officer test and therefore is considered above average.',
+            '',
+            'PERSONAL:',
+            `Promoted to Police Officer I, service number "${badge}"; assigned!`,
+            '```'
+        ].join('\n');
+    }
+
+    return [
+        '```ansi',
+        '\u001b[2;31mPerformance review\u001b[0m',
+        `\u001b[1;2mCO name: ${toName}`,
+        `Rank: ${rank}`,
+        `Date: ${dateFormatted}\u001b[0m`,
+        '',
+        'The results of the performance review:',
+        'AUTOMATED: This employee has not demonstrated sufficient comprehension of operational procedures. Additional guidance is required.',
+        '',
+        'The employee failed his officer test and is currently marked as needing improvement.',
+        '',
+        'PERSONAL:',
+        'Cadet failed the CTO evaluation. Re-evaluation required under supervising officer.',
+        '```'
+    ].join('\n');
+}
+
+async function closePassedCtoThread(thread) {
+    const passedTitle = thread.name.startsWith('{PASSED}')
+        ? thread.name
+        : `{PASSED} ${thread.name}`.slice(0, 100);
+
+    await thread.setName(passedTitle);
+    await thread.setArchived(true);
+}
 
 module.exports = {
     data: new SlashCommandBuilder()

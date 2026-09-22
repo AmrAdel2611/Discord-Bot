@@ -3,9 +3,49 @@ const { getCommandRole } = require('../utils/guildConfig');
 const {
     readState,
     writeState,
-    buildTrainingNotice,
     buildInvitePost
 } = require('./cadets');
+
+function buildTrainingNotice(toName, rank, customTrainings = '') {
+    const now = new Date();
+    const day = String(now.getUTCDate()).padStart(2, '0');
+    const month = String(now.getUTCMonth() + 1).padStart(2, '0');
+    const year = now.getUTCFullYear();
+    const hours = String(now.getUTCHours()).padStart(2, '0');
+    const minutes = String(now.getUTCMinutes()).padStart(2, '0');
+    const dateFormatted = `${day}.${month}.${year} ${hours}:${minutes}`;
+    const customTrainingLines = customTrainings
+        .split(',')
+        .map(training => training.trim())
+        .filter(Boolean)
+        .map(training => `- ${training}`);
+    const trainingLines = customTrainingLines.length > 0
+        ? customTrainingLines
+        : [
+            '- Radio Procedure & Communication',
+            '- Basic Law Enforcement Theory',
+            '- Levels of Force',
+            '- Traffic Stops',
+            '- Arrest',
+            '- OOC Rules and Information'
+        ];
+
+    return [
+        '```ansi',
+        '\u001b[2;32mPerformance review\u001b[0m',
+        `\u001b[1;2mCO name: ${toName}`,
+        `Rank: ${rank}`,
+        `Date: ${dateFormatted}\u001b[0m`,
+        '',
+        'The results of the performance review:',
+        'AUTOMATED: This employee has completed mandatory introductory training and demonstrated satisfactory comprehension of standard operating guidelines.',
+        '',
+        'PERSONAL:',
+        'Training Conducted:',
+        ...trainingLines,
+        '```'
+    ].join('\n');
+}
 
 module.exports = {
     data: new SlashCommandBuilder()

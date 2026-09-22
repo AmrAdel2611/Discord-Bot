@@ -134,11 +134,18 @@ function getCountryFlag(country) {
 }
 
 function isSniper(member, onlinePlayer) {
-    return Boolean(
-        member.sniper
+    const tier = member.tier ?? onlinePlayer?.tier;
+    const explicitSniper = member.sniper
         ?? member.is_sniper
         ?? onlinePlayer?.sniper
-        ?? onlinePlayer?.is_sniper
+        ?? onlinePlayer?.is_sniper;
+
+    return Boolean(
+        tier === 0
+        || tier === 1
+        || String(tier).trim() === '0'
+        || String(tier).trim() === '1'
+        || explicitSniper
     );
 }
 
