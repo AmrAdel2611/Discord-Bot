@@ -13,8 +13,8 @@ module.exports = {
                 {
                     name: 'Training Modules',
                     value: [
-                        '`/cadets training` - Post a training completion review.',
-                        '`/cadets cto` - Post a CTO exam result and close passed records.'
+                        '`/training` - Post a training completion review.',
+                        '`/cto` - Post a CTO exam result and close passed records.'
                     ].join('\n')
                 },
                 {

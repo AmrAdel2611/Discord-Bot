@@ -146,7 +146,7 @@ async function sendAltCadetSetRankMessage(client, guildId, cadetName) {
     await channel.send(`/setrank ${cadetName} [SO] Police Cadet`);
 }
 
-function buildTrainingNotice(toName, rank) {
+function buildTrainingNotice(toName, rank, customTrainings = '') {
     const now = new Date();
     const day = String(now.getUTCDate()).padStart(2, '0');
     const month = String(now.getUTCMonth() + 1).padStart(2, '0');
@@ -154,6 +154,11 @@ function buildTrainingNotice(toName, rank) {
     const hours = String(now.getUTCHours()).padStart(2, '0');
     const minutes = String(now.getUTCMinutes()).padStart(2, '0');
     const dateFormatted = `${day}.${month}.${year} ${hours}:${minutes}`;
+    const customTrainingLines = customTrainings
+        .split(',')
+        .map(training => training.trim())
+        .filter(Boolean)
+        .map(training => `- ${training}`);
 
     return [
         '```ansi',
@@ -173,6 +178,7 @@ function buildTrainingNotice(toName, rank) {
         '- Traffic Stops',
         '- Arrest',
         '- OOC Rules and Information',
+        ...customTrainingLines,
         '```'
     ].join('\n');
 }
@@ -239,19 +245,10 @@ function buildRecordNotice({ coName, rank, personalNote }) {
 }
 
 async function closePassedCtoThread(thread) {
-    const passedTag = thread.parent?.availableTags?.find(
-        tag => tag.name.toLowerCase() === 'passed cto'
-    );
-
-    if (!passedTag) {
-        throw new Error('The forum tag "Passed CTO" was not found.');
-    }
-
     const passedTitle = thread.name.startsWith('{PASSED}')
         ? thread.name
         : `{PASSED} ${thread.name}`.slice(0, 100);
 
-    await thread.setAppliedTags([passedTag.id]);
     await thread.setName(passedTitle);
     await thread.setArchived(true);
 }
@@ -334,52 +331,6 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('cadets')
         .setDescription('Manage cadet records and logs')
-        // /cadets training
-        .addSubcommand(subcommand => subcommand
-            .setName('training')
-            .setDescription('Post a training completion review into the cadet thread')
-            .addStringOption(opt => opt
-                .setName('cadet_name')
-                .setDescription('Exact name of the cadet')
-                .setAutocomplete(true)
-                .setRequired(true))
-            .addStringOption(opt => opt
-                .setName('to_name')
-                .setDescription('Training Officer name')
-                .setRequired(true))
-            .addStringOption(opt => opt
-                .setName('rank')
-                .setDescription('Training Officer rank (e.g., PO III, Sergeant)')
-                .setRequired(true)))
-        // /cadets cto
-        .addSubcommand(subcommand => subcommand
-            .setName('cto')
-            .setDescription('Post a CTO Exam performance review')
-            .addStringOption(opt => opt
-                .setName('cadet_name')
-                .setDescription('Exact name of the cadet')
-                .setAutocomplete(true)
-                .setRequired(true))
-            .addStringOption(opt => opt
-                .setName('to_name')
-                .setDescription('Testing Officer name')
-                .setRequired(true))
-            .addStringOption(opt => opt
-                .setName('rank')
-                .setDescription('Testing Officer rank')
-                .setRequired(true))
-            .addStringOption(opt => opt
-                .setName('result')
-                .setDescription('Exam result')
-                .setRequired(true)
-                .addChoices(
-                    { name: 'Passed', value: 'Passed' },
-                    { name: 'Failed', value: 'Failed' }
-                ))
-            .addStringOption(opt => opt
-                .setName('badge')
-                .setDescription('Assigned Badge / Service Number (if passed)')
-                .setRequired(false)))
         // /cadets edit
         .addSubcommand(subcommand => subcommand
             .setName('edit')
@@ -428,105 +379,7 @@ module.exports = {
         const sub = interaction.options.getSubcommand();
         const state = readState();
 
-        // 1. TRAINING
-        if (sub === 'training') {
-            await interaction.deferReply({ ephemeral: true });
-            const cadetName = interaction.options.getString('cadet_name').trim().toLowerCase();
-            const toName = interaction.options.getString('to_name').trim();
-            const rank = interaction.options.getString('rank').trim();
-
-            const entry = Object.values(state.processed).find(
-                item => typeof item.name === 'string' && item.name.toLowerCase() === cadetName
-            );
-
-            if (!entry || !entry.threadId) {
-                return interaction.editReply(`Could not find a valid forum thread for cadet: **${cadetName}**.`);
-            }
-
-            try {
-                const thread = await interaction.client.channels.fetch(entry.threadId);
-                const notice = buildTrainingNotice(toName, rank);
-                await thread.send({ content: notice });
-                entry.trainings = 'Done';
-                const starterMessage = await thread.fetchStarterMessage();
-                await starterMessage.edit({ content: buildInvitePost(entry) });
-                writeState(state);
-                return interaction.editReply(`Successfully posted training log for **${entry.name}**.`);
-            } catch (err) {
-                console.error(err);
-                return interaction.editReply(`Failed to post training notice: ${err.message}`);
-            }
-        }
-
-        // 2. CTO EXAM
-        if (sub === 'cto') {
-            const cadetName = interaction.options.getString('cadet_name').trim().toLowerCase();
-            const toName = interaction.options.getString('to_name').trim();
-            const rank = interaction.options.getString('rank').trim();
-            const badge = interaction.options.getString('badge')?.trim();
-            const result = interaction.options.getString('result');
-
-            if (result === 'Passed' && !badge) {
-                return interaction.reply({
-                    content: 'You must provide a badge/service number when marking a cadet as **Passed**.',
-                    ephemeral: true
-                });
-            }
-
-            await interaction.deferReply({ ephemeral: true });
-
-            const entry = Object.values(state.processed).find(
-                item => typeof item.name === 'string' && item.name.toLowerCase() === cadetName
-            );
-
-            if (!entry || !entry.threadId) {
-                return interaction.editReply(`Could not find a valid forum thread for cadet: **${cadetName}**.`);
-            }
-
-            try {
-                const thread = await interaction.client.channels.fetch(entry.threadId);
-                const notice = buildCtoNotice(toName, rank, badge, result);
-                await thread.send({ content: notice });
-
-                entry.ctoExam = `${result} (${formatStatusDate()})`;
-                entry.ctoResult = result;
-
-                if (result === 'Passed') {
-                    entry.ctoTag = 'Passed CTO';
-                    entry.closed = true;
-                }
-
-                const starterMessage = await thread.messages.fetch(thread.id);
-                await starterMessage.edit({ content: buildInvitePost(entry) });
-                writeState(state);
-
-                if (result === 'Passed') {
-                    await sendSetRankMessage(
-                        interaction.client,
-                        interaction.guildId,
-                        entry.name,
-                        'Police Officer I',
-                        badge,
-                        entry.accountType
-                    );
-                    entry.isSO = true;
-                    state.processed[entry.messageId] = { messageId: entry.messageId, isSO: true };
-                    writeState(state);
-                    await closePassedCtoThread(thread);
-
-                    return interaction.editReply(
-                        `Successfully posted CTO result (Passed), sent the promotion command for badge **${badge}**, and closed the post.`
-                    );
-                }
-
-                return interaction.editReply(`Successfully posted CTO result (${result}) for **${entry.name}**.`);
-            } catch (err) {
-                console.error(err);
-                return interaction.editReply(`Failed to post CTO review: ${err.message}`);
-            }
-        }
-
-        // 3. EDIT
+        // EDIT
         if (sub === 'edit') {
             await interaction.deferReply({ ephemeral: true });
 
@@ -634,5 +487,13 @@ module.exports = {
     },
 
     processInviteMessage,
-    refreshInviteLogs
+    refreshInviteLogs,
+    readState,
+    writeState,
+    buildInvitePost,
+    buildTrainingNotice,
+    buildCtoNotice,
+    formatStatusDate,
+    sendSetRankMessage,
+    closePassedCtoThread
 };
