@@ -10,10 +10,15 @@
       "threadId": "1549101238144991232",
       "pr": "https://sa-mp.im/forum/thread/139650/tba-kyoto-dalquez-police-cadet-01-09-2026#post-1882600",
       "accountType": "Alt",
-      "mainUcp": "https://sa-mp.im/player/123255029/Gideon_VasQuezz"
+      "mainUcp": "https://sa-mp.im/player/123255029/Gideon_VasQuezz",
+      "isSO": true
     },
     "1549101378113249341": {
-      "messageId": "1549101378113249341"
+      "messageId": "1549101378113249341",
+      "isSO": false,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "accountType": "Main"
     },
     "1549101433784111176": {
       "messageId": "1549101433784111176",
@@ -24,10 +29,15 @@
       "ctoExam": "TBD",
       "threadId": "1549101434753122305",
       "pr": "https://sa-mp.im/forum/thread/139647/tba-fransesco-andolini-police-cadet-06-09-2026#post-1882581",
-      "accountType": "Main"
+      "accountType": "Main",
+      "isSO": false
     },
     "1549101490461999175": {
-      "messageId": "1549101490461999175"
+      "messageId": "1549101490461999175",
+      "isSO": false,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "accountType": "Main"
     },
     "1549101551551774761": {
       "messageId": "1549101551551774761",
@@ -36,7 +46,9 @@
       "date": "05.09.2026",
       "trainings": "TBD",
       "ctoExam": "TBD",
-      "threadId": "1549101554458427623"
+      "threadId": "1549101554458427623",
+      "isSO": false,
+      "accountType": "Main"
     },
     "1549101599886938337": {
       "messageId": "1549101599886938337",
@@ -45,7 +57,9 @@
       "date": "10.09.2026",
       "trainings": "TBD",
       "ctoExam": "TBD",
-      "threadId": "1549101600642039840"
+      "threadId": "1549101600642039840",
+      "isSO": false,
+      "accountType": "Main"
     },
     "1549101627607228418": {
       "messageId": "1549101627607228418",
@@ -54,10 +68,17 @@
       "date": "10.09.2026",
       "trainings": "TBD",
       "ctoExam": "TBD",
-      "threadId": "1549101628676771961"
+      "threadId": "1549101628676771961",
+      "isSO": true,
+      "accountType": "Alt",
+      "mainUcp": "https://sa-mp.im/player/123186388/Gustavo_Vici"
     },
     "1549101653859500295": {
-      "messageId": "1549101653859500295"
+      "messageId": "1549101653859500295",
+      "isSO": false,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "accountType": "Main"
     },
     "1549101683601309768": {
       "messageId": "1549101683601309768",
@@ -67,10 +88,16 @@
       "trainings": "TBD",
       "ctoExam": "Failed (20.09.2026)",
       "threadId": "1549101684762869830",
-      "ctoResult": "Failed"
+      "ctoResult": "Failed",
+      "isSO": false,
+      "accountType": "Main"
     },
     "1549102673423372289": {
-      "messageId": "1549102673423372289"
+      "messageId": "1549102673423372289",
+      "isSO": false,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "accountType": "Main"
     },
     "1549692435527901185": {
       "messageId": "1549692435527901185",
@@ -81,16 +108,15 @@
       "ctoExam": "TBD",
       "threadId": "1549692438413705306",
       "accountType": "Alt",
-      "mainUcp": "https://sa-mp.im/player/123236670/Polat_Aslanov"
+      "mainUcp": "https://sa-mp.im/player/123236670/Polat_Aslanov",
+      "isSO": true
     },
     "1551096066613448806": {
       "messageId": "1551096066613448806",
-      "name": "Adem_Anderson",
-      "invitedBy": "Ganza_Marino",
-      "date": "19.09.2026",
+      "isSO": false,
       "trainings": "TBD",
       "ctoExam": "TBD",
-      "threadId": "1551096067595182132"
+      "accountType": "Main"
     },
     "1551201766408982611": {
       "messageId": "1551201766408982611",
@@ -99,7 +125,154 @@
       "date": "20.09.2026",
       "trainings": "TBD",
       "ctoExam": "TBD",
-      "threadId": "1551201767767802007"
+      "threadId": "1551201767767802007",
+      "isSO": true,
+      "accountType": "Alt",
+      "mainUcp": "https://sa-mp.im/player/123221534/Melchoir_Mucahit"
+    },
+    "1551278727789281401": {
+      "messageId": "1551278727789281401",
+      "name": "Zoran_Urra",
+      "invitedBy": "Niko_Gotti",
+      "date": "20.09.2026",
+      "accountType": "Alt",
+      "isSO": true,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "threadId": "1551279172767191195",
+      "mainUcp": "https://sa-mp.im/player/123237902/Vucko_Falcone"
+    },
+    "1551337659383939097": {
+      "messageId": "1551337659383939097",
+      "isSO": false,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "accountType": "Main"
+    },
+    "1551564151707672728": {
+      "messageId": "1551564151707672728",
+      "isSO": false,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "accountType": "Main"
+    },
+    "1551579250677784691": {
+      "messageId": "1551579250677784691",
+      "name": "Paul_Russo",
+      "invitedBy": "Ganza_Marino",
+      "date": "21.09.2026",
+      "accountType": "Alt",
+      "isSO": true,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "threadId": "1551579253236047983",
+      "mainUcp": "https://sa-mp.im/player/123250023/Khaled_Tofaha"
+    },
+    "1551579257648586794": {
+      "messageId": "1551579257648586794",
+      "name": "Abdelkader_Colucci",
+      "invitedBy": "Niko_Gotti",
+      "date": "21.09.2026",
+      "accountType": "Alt",
+      "isSO": true,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "threadId": "1551579260718678067",
+      "mainUcp": "https://sa-mp.im/player/123245620/Sean_Colucci"
+    },
+    "1551656643710820447": {
+      "messageId": "1551656643710820447",
+      "name": "Patrick_Chambers",
+      "invitedBy": "Nicholas_Roselli",
+      "date": "21.09.2026",
+      "accountType": "Main",
+      "isSO": false,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "threadId": "1551656644968972379"
+    },
+    "1551730246015778928": {
+      "messageId": "1551730246015778928",
+      "isSO": false,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "accountType": "Main"
+    },
+    "1551730248955990178": {
+      "messageId": "1551730248955990178",
+      "isSO": false,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "accountType": "Main"
+    },
+    "1551881241450778665": {
+      "messageId": "1551881241450778665",
+      "name": "Fabio_Maxwin",
+      "invitedBy": "Niko_Gotti",
+      "date": "22.09.2026",
+      "accountType": "Alt",
+      "isSO": true,
+      "trainings": "Done",
+      "ctoExam": "TBD",
+      "threadId": "1551881242876579880",
+      "pr": "https://sa-mp.im/forum/thread/120087/tba-sekula-kosich-police-cadet-17-10-2020",
+      "mainUcp": "https://sa-mp.im/player/123217212/Fin_Fibonacci"
+    },
+    "1551918902861369435": {
+      "messageId": "1551918902861369435",
+      "isSO": false,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "accountType": "Main"
+    },
+    "1551921076702019626": {
+      "messageId": "1551921076702019626",
+      "isSO": false,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "accountType": "Main"
+    },
+    "1551941638929256459": {
+      "messageId": "1551941638929256459",
+      "isSO": false,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "accountType": "Main"
+    },
+    "1552273827755720760": {
+      "messageId": "1552273827755720760",
+      "name": "Masterio_Maldonado",
+      "invitedBy": "Niko_Gotti",
+      "date": "23.09.2026",
+      "accountType": "Main",
+      "isSO": false,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "threadId": "1552273829735432263"
+    },
+    "1552273832113340417": {
+      "messageId": "1552273832113340417",
+      "name": "Veljko_Krasniqi",
+      "invitedBy": "Niko_Gotti",
+      "date": "23.09.2026",
+      "accountType": "Alt",
+      "isSO": true,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "threadId": "1552273833539674112",
+      "pr": "https://sa-mp.im/forum/thread/139738/tba-veljko-krasniqi-police-cadet-23-09-2026",
+      "mainUcp": "https://sa-mp.im/player/123234309/Mickey_Cerovina"
+    },
+    "1552391054911606879": {
+      "messageId": "1552391054911606879",
+      "name": "Test_Krasniqi",
+      "invitedBy": "Luigi_Narcotti",
+      "date": "23.09.2026",
+      "accountType": "Main",
+      "isSO": false,
+      "trainings": "TBD",
+      "ctoExam": "TBD",
+      "threadId": "1552391056547385354"
     }
   }
 }

@@ -3,7 +3,8 @@ const path = require('path');
 const { SlashCommandBuilder } = require('discord.js');
 require('dotenv').config();
 
-const { getGuildChannel } = require('../utils/guildConfig');
+const { getCommandRole, getGuildChannel } = require('../utils/guildConfig');
+const { syncInviteRecordsFromDatabase } = require('../utils/performanceLogs');
 
 const statePath = path.join(__dirname, '..', 'invite_logs.json');
 const setRankChannelId = process.env.SET_RANK_CHANNEL_ID;
@@ -91,9 +92,17 @@ module.exports = {
         .setDescription('Recheck invite records and setrank requests'),
 
     async execute(interaction) {
-        if (interaction.user.id !== process.env.BOT_OWNER_ID) {
+        const roleId = getCommandRole(interaction.guildId, 'command');
+        if (!roleId) {
             return interaction.reply({
-                content: 'Only the bot owner can use `/update`.',
+                content: 'The Command role has not been configured for this server.',
+                ephemeral: true
+            });
+        }
+
+        if (!interaction.member.roles.cache.has(roleId)) {
+            return interaction.reply({
+                content: 'You do not have the role required to use `/update`.',
                 ephemeral: true
             });
         }
@@ -101,6 +110,7 @@ module.exports = {
         await interaction.deferReply({ ephemeral: true });
 
         try {
+            const performanceSync = syncInviteRecordsFromDatabase();
             const channelId = getGuildChannel(interaction.guildId, 'setrank', setRankChannelId);
             if (!channelId) {
                 return interaction.editReply('The setrank request channel is not configured for this server.');
@@ -181,6 +191,7 @@ module.exports = {
             }
 
             return interaction.editReply([
+                `Historical instructor invite logs imported: **${performanceSync.imported}**.`,
                 `Alt records checked: **${altChecked}**.`,
                 `Setrank posts verified: **${verified}**.`,
                 `Setrank posts created: **${posted}**.`,

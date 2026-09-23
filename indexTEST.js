@@ -6,9 +6,9 @@ const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
-        ...(process.env.MESSAGE_CONTENT_INTENT === 'true'
-            ? [GatewayIntentBits.MessageContent]
-            : [])
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildMessageReactions
     ]
 });
 
@@ -91,4 +91,4 @@ for (const file of eventFiles) {
 
 
 
-client.login(process.env.TOKEN);
+client.login(process.env.TEST_TOKEN);

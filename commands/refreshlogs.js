@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('discord.js');
 require('dotenv').config();
 
 const { getCommandRole } = require('../utils/guildConfig');
-const { refreshInviteLogs } = require('./cadets');
+const { refreshInviteLogs } = require('../utils/cadetRecords');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -10,10 +10,10 @@ module.exports = {
         .setDescription('Import old invite logs into the cadet forum.'),
 
     async execute(interaction) {
-        const roleId = getCommandRole(interaction.guildId, 'cadets');
+        const roleId = getCommandRole(interaction.guildId, 'command');
         if (!roleId) {
             return interaction.reply({
-                content: 'The `/cadets` command has not been configured for this server.',
+                content: 'The Command role has not been configured for this server.',
                 ephemeral: true
             });
         }

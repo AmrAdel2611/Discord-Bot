@@ -20,19 +20,22 @@ function writeGuilds(guilds) {
     fs.writeFileSync(configPath, JSON.stringify(guilds, null, 2));
 }
 
-function setCommandRole(guildId, commandName, roleId) {
+function setRole(guildId, roleName, roleId) {
     const guilds = readGuilds();
-    const guild = guilds[guildId] || { commands: {} };
+    const guild = guilds[guildId] || {};
 
-    guild.commands = guild.commands || {};
-    guild.commands[commandName] = { role_id: roleId };
+    guild.roles = guild.roles || {};
+    guild.roles[roleName] = roleId;
     guilds[guildId] = guild;
     writeGuilds(guilds);
 }
 
-function getCommandRole(guildId, commandName) {
+function getCommandRole(guildId, roleType) {
     const guild = readGuilds()[guildId];
-    return guild?.commands?.[commandName]?.role_id || null;
+    const roleName = roleType === 'training_officer' ? 'TrainingOfficer' : 'Command';
+    return guild?.roles?.[roleName]
+        || guild?.commands?.[roleType]?.role_id
+        || null;
 }
 
 function setGuildChannels(guildId, channels) {
@@ -53,4 +56,4 @@ function getGuildChannel(guildId, channelName, fallback = null) {
     return readGuilds()[guildId]?.channels?.[channelName] || fallback;
 }
 
-module.exports = { getCommandRole, getGuildChannel, setCommandRole, setGuildChannels };
+module.exports = { getCommandRole, getGuildChannel, setGuildChannels, setRole };

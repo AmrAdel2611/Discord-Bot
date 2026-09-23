@@ -1,105 +1,14 @@
-const fs = require('fs');
-const path = require('path');
 const { SlashCommandBuilder } = require('discord.js');
 require('dotenv').config();
 
 const { getCommandRole, getGuildChannel } = require('../utils/guildConfig');
-
-const statePath = path.join(__dirname, '..', 'invite_logs.json');
-const sourceChannelId = process.env.INVITE_LOGS_CHANNEL_ID;
-const outputChannelId = process.env.post_channel;
 const setRankChannelId = process.env.SET_RANK_CHANNEL_ID;
 
-function readState() {
-    if (!fs.existsSync(statePath)) {
-        return { processed: {} };
-    }
-
-    try {
-        const state = JSON.parse(fs.readFileSync(statePath, 'utf8'));
-        const normalizedState = {
-            ...state,
-            processed: state && typeof state.processed === 'object' ? state.processed : {}
-        };
-
-        let changed = false;
-        for (const entry of Object.values(normalizedState.processed)) {
-            if (typeof entry.isSO !== 'boolean') {
-                entry.isSO = false;
-                changed = true;
-            }
-
-            if (Object.keys(entry).length === 1 && entry.messageId) {
-                continue;
-            }
-
-            if (!entry.trainings) {
-                entry.trainings = 'TBD';
-                changed = true;
-            }
-            if (!entry.ctoExam) {
-                entry.ctoExam = 'TBD';
-                changed = true;
-            }
-            if (!entry.accountType) {
-                entry.accountType = 'Main';
-                changed = true;
-            }
-        }
-
-        if (changed) {
-            writeState(normalizedState);
-        }
-
-        return normalizedState;
-    } catch (error) {
-        console.error('Failed to read invite log state:', error.message);
-        return { processed: {} };
-    }
-}
-
-function writeState(state) {
-    fs.writeFileSync(statePath, JSON.stringify(state, null, 2));
-}
-
-function parseInviteLog(message) {
-    const nameMatch = message.content.match(/\bname\s*:\s*"([^"]*)"/i);
-    const invitedByMatch = message.content.match(/\binvited_by\s*:\s*"([^"]*)"/i);
-    const timestampMatch = message.content.match(/\btimestamp\s*:\s*"([^"]*)"/i);
-
-    if (!nameMatch || !invitedByMatch || !timestampMatch) {
-        return null;
-    }
-
-    const date = new Date(timestampMatch[1]);
-    if (Number.isNaN(date.getTime())) {
-        return null;
-    }
-
-    const formattedDate = date.toISOString().split('T')[0].split('-').reverse().join('.');
-    return {
-        messageId: message.id,
-        name: nameMatch[1].trim(),
-        invitedBy: invitedByMatch[1].trim(),
-        date: formattedDate,
-        accountType: 'Main',
-        isSO: false,
-        trainings: 'TBD',
-        ctoExam: 'TBD'
-    };
-}
-
-function buildInvitePost(invite) {
-    return [
-        `Date of Invite: ${invite.date}`,
-        `Invited By: ${invite.invitedBy}`,
-        `PR: ${invite.pr || 'TBA'}`,
-        `Main or Alt: ${invite.accountType || ''}`,
-        `If alt, main: ${invite.mainUcp || (invite.accountType === 'Main' ? invite.ucp || '' : '')}`,
-        `Trainings: ${invite.trainings || 'None'}`,
-        `CTO Exam: ${invite.ctoExam || 'TBD'}`
-    ].join('\n');
-}
+const {
+    buildInvitePost,
+    readState,
+    writeState
+} = require('../utils/cadetRecords');
 
 async function sendAltCadetSetRankMessage(client, guildId, cadetName) {
     const channelId = getGuildChannel(guildId, 'setrank', setRankChannelId);
@@ -130,80 +39,6 @@ function buildRecordNotice({ coName, rank, personalNote }) {
         personalNote,
         '```'
     ].join('\n');
-}
-
-async function postInvite(client, guildId, invite) {
-    const channelId = getGuildChannel(guildId, 'forum', outputChannelId);
-    const outputChannel = await client.channels.fetch(channelId);
-    if (!outputChannel?.isThreadOnly()) {
-        throw new Error('post_channel must be a Discord forum channel');
-    }
-
-    const threadName = `CADET | ${invite.name}`.slice(0, 100);
-    const thread = await outputChannel.threads.create({
-        name: threadName,
-        message: { content: buildInvitePost(invite) }
-    });
-
-    invite.threadId = thread.id;
-    return thread;
-}
-
-async function processInviteMessage(message, client) {
-    const configuredSourceChannelId = getGuildChannel(message.guildId, 'inviteLogs', sourceChannelId);
-    if (message.channel.id !== configuredSourceChannelId) {
-        return false;
-    }
-
-    const invite = parseInviteLog(message);
-    if (!invite) {
-        return false;
-    }
-
-    const state = readState();
-    if (state.processed[invite.messageId]) {
-        return false;
-    }
-
-    await postInvite(client, message.guildId, invite);
-    state.processed[invite.messageId] = invite;
-    writeState(state);
-    return true;
-}
-
-async function refreshInviteLogs(interaction) {
-    const configuredSourceChannelId = getGuildChannel(interaction.guildId, 'inviteLogs', sourceChannelId);
-    const configuredOutputChannelId = getGuildChannel(interaction.guildId, 'forum', outputChannelId);
-    if (!configuredSourceChannelId || !configuredOutputChannelId) {
-        return interaction.reply({
-            content: 'Invite log and forum channels are not configured for this server.',
-            ephemeral: true
-        });
-    }
-
-    await interaction.deferReply({ ephemeral: true });
-    const state = readState();
-    const sourceChannel = await interaction.client.channels.fetch(configuredSourceChannelId);
-    const messages = await sourceChannel.messages.fetch({ limit: 10 });
-    const newInvites = [];
-
-    for (const message of messages.values()) {
-        const invite = parseInviteLog(message);
-        if (!invite || state.processed[invite.messageId]) {
-            continue;
-        }
-
-        await postInvite(interaction.client, interaction.guildId, invite);
-        state.processed[invite.messageId] = invite;
-        newInvites.push(invite);
-    }
-
-    writeState(state);
-    return interaction.editReply(
-        newInvites.length > 0
-            ? `Posted ${newInvites.length} new invite log${newInvites.length === 1 ? '' : 's'}.`
-            : 'No new invite logs found in the last 10 messages.'
-    );
 }
 
 module.exports = {
@@ -240,7 +75,7 @@ module.exports = {
                 .setRequired(false))),
 
     async execute(interaction) {
-        const roleId = getCommandRole(interaction.guildId, 'cadets');
+        const roleId = getCommandRole(interaction.guildId, 'training_officer');
         if (!roleId) {
             return interaction.reply({
                 content: 'The `/cadets` command has not been configured for this server.',
@@ -341,7 +176,7 @@ module.exports = {
     },
 
     async autocomplete(interaction) {
-        const roleId = getCommandRole(interaction.guildId, 'cadets');
+        const roleId = getCommandRole(interaction.guildId, 'training_officer');
         if (!roleId || !interaction.member.roles.cache.has(roleId)) {
             return interaction.respond([]);
         }
@@ -365,10 +200,7 @@ module.exports = {
         await interaction.respond(choices);
     },
 
-    processInviteMessage,
-    refreshInviteLogs,
     readState,
     writeState,
-    buildInvitePost,
     sendAltCadetSetRankMessage
 };

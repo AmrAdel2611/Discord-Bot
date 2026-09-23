@@ -3,10 +3,15 @@ require('dotenv').config();
 
 const { getCommandRole, getGuildChannel } = require('../utils/guildConfig');
 const {
+    buildInvitePost,
     readState,
-    writeState,
-    buildInvitePost
-} = require('./cadets');
+    writeState
+} = require('../utils/cadetRecords');
+const {
+    getInstructor,
+    getInstructorChoices,
+    recordCto
+} = require('../utils/performanceLogs');
 
 const setRankChannelId = process.env.SET_RANK_CHANNEL_ID;
 
@@ -41,7 +46,7 @@ async function sendSetRankMessage(client, guildId, cadetName, rank, serviceNumbe
     await channel.send(`/setrank ${cadetName}${badgePart} ${rank}`);
 }
 
-function buildCtoNotice(toName, rank, badge, result) {
+function buildCtoNotice(toName, badge, result) {
     const now = new Date();
     const day = String(now.getUTCDate()).padStart(2, '0');
     const month = String(now.getUTCMonth() + 1).padStart(2, '0');
@@ -53,7 +58,7 @@ function buildCtoNotice(toName, rank, badge, result) {
             '```ansi',
             '\u001b[2;32mPerformance review\u001b[0m',
             `\u001b[1;2mCO name: ${toName}`,
-            `Rank: ${rank}`,
+            'Rank: Training Officer',
             `Date: ${dateFormatted}\u001b[0m`,
             '',
             'The results of the performance review:',
@@ -71,7 +76,7 @@ function buildCtoNotice(toName, rank, badge, result) {
         '```ansi',
         '\u001b[2;31mPerformance review\u001b[0m',
         `\u001b[1;2mCO name: ${toName}`,
-        `Rank: ${rank}`,
+        'Rank: Training Officer',
         `Date: ${dateFormatted}\u001b[0m`,
         '',
         'The results of the performance review:',
@@ -106,10 +111,7 @@ module.exports = {
         .addStringOption(opt => opt
             .setName('to_name')
             .setDescription('Testing Officer name')
-            .setRequired(true))
-        .addStringOption(opt => opt
-            .setName('rank')
-            .setDescription('Testing Officer rank')
+            .setAutocomplete(true)
             .setRequired(true))
         .addStringOption(opt => opt
             .setName('result')
@@ -125,7 +127,7 @@ module.exports = {
             .setRequired(false)),
 
     async execute(interaction) {
-        const roleId = getCommandRole(interaction.guildId, 'cto');
+        const roleId = getCommandRole(interaction.guildId, 'training_officer');
         if (!roleId) {
             return interaction.reply({
                 content: 'The `/cto` command has not been configured for this server.',
@@ -142,9 +144,15 @@ module.exports = {
 
         const cadetName = interaction.options.getString('cadet_name').trim().toLowerCase();
         const toName = interaction.options.getString('to_name').trim();
-        const rank = interaction.options.getString('rank').trim();
         const badge = interaction.options.getString('badge')?.trim();
         const result = interaction.options.getString('result');
+
+        if (!getInstructor(toName)) {
+            return interaction.reply({
+                content: `**${toName}** is not on the instructor roster. Use \`/instructor add\` first.`,
+                ephemeral: true
+            });
+        }
 
         if (result === 'Passed' && !badge) {
             return interaction.reply({
@@ -165,11 +173,13 @@ module.exports = {
 
         try {
             const thread = await interaction.client.channels.fetch(entry.threadId);
-            const notice = buildCtoNotice(toName, rank, badge, result);
+            const notice = buildCtoNotice(toName, badge, result);
             await thread.send({ content: notice });
 
             entry.ctoExam = `${result} (${formatStatusDate()})`;
             entry.ctoResult = result;
+            entry.ctoOfficer = toName;
+            recordCto(entry, toName, result);
 
             if (result === 'Passed') {
                 entry.closed = true;
@@ -189,7 +199,6 @@ module.exports = {
                     entry.accountType
                 );
                 entry.isSO = true;
-                state.processed[entry.messageId] = { messageId: entry.messageId, isSO: true };
                 writeState(state);
                 await closePassedCtoThread(thread);
 
@@ -206,12 +215,16 @@ module.exports = {
     },
 
     async autocomplete(interaction) {
-        const roleId = getCommandRole(interaction.guildId, 'cto');
+        const roleId = getCommandRole(interaction.guildId, 'training_officer');
         if (!roleId || !interaction.member.roles.cache.has(roleId)) {
             return interaction.respond([]);
         }
 
         const focusedValue = interaction.options.getFocused().toLowerCase();
+        if (interaction.options.getFocused(true).name === 'to_name') {
+            return interaction.respond(getInstructorChoices(focusedValue));
+        }
+
         const seenNames = new Set();
         const choices = Object.values(readState().processed)
             .filter(entry => entry.threadId && entry.name)

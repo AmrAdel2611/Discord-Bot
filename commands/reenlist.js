@@ -62,7 +62,7 @@ module.exports = {
             .setRequired(true)),
 
     async execute(interaction) {
-        const roleId = getCommandRole(interaction.guildId, 'reenlist');
+        const roleId = getCommandRole(interaction.guildId, 'training_officer');
         if (!roleId) {
             return interaction.reply({
                 content: 'The `/reenlist` command has not been configured for this server.',
@@ -107,7 +107,7 @@ module.exports = {
     },
 
     async autocomplete(interaction) {
-        const roleId = getCommandRole(interaction.guildId, 'reenlist');
+        const roleId = getCommandRole(interaction.guildId, 'training_officer');
         if (!roleId || !interaction.member.roles.cache.has(roleId)) {
             return interaction.respond([]);
         }

@@ -3,6 +3,10 @@ const path = require('path');
 const { SlashCommandBuilder } = require('discord.js');
 
 const { getCommandRole } = require('../utils/guildConfig');
+const {
+	getInstructor,
+	getInstructorChoices
+} = require('../utils/performanceLogs');
 
 const statePath = path.join(__dirname, '..', 'invite_logs.json');
 
@@ -32,12 +36,12 @@ function formatDate() {
 	return `${String(now.getUTCDate()).padStart(2, '0')}.${String(now.getUTCMonth() + 1).padStart(2, '0')}.${now.getUTCFullYear()}`;
 }
 
-function buildFireNotice({ toName, rank, reason }) {
+function buildFireNotice({ toName, reason }) {
 	return [
 		'```ansi',
 		'\u001b[1;31mDisciplinary note\u001b[0m',
 		`\u001b[1mCO name:\u001b[0m ${toName}`,
-		`\u001b[1mRank:\u001b[0m ${rank}`,
+		'\u001b[1mRank:\u001b[0m Training Officer',
 		`\u001b[1mDate:\u001b[0m ${formatDate()}`,
 		'',
 		'\u001b[1mStatement:\u001b[0m',
@@ -62,10 +66,7 @@ module.exports = {
 		.addStringOption(option => option
 			.setName('to_name')
 			.setDescription('Commanding officer name')
-			.setRequired(true))
-		.addStringOption(option => option
-			.setName('rank')
-			.setDescription('Commanding officer rank')
+			.setAutocomplete(true)
 			.setRequired(true))
 		.addStringOption(option => option
 			.setName('reason')
@@ -73,7 +74,7 @@ module.exports = {
 			.setRequired(true)),
 
 	async execute(interaction) {
-		const roleId = getCommandRole(interaction.guildId, 'fire');
+		const roleId = getCommandRole(interaction.guildId, 'training_officer');
 		if (!roleId) {
 			return interaction.reply({
 				content: 'The `/fire` command has not been configured for this server.',
@@ -92,8 +93,11 @@ module.exports = {
 
 		const targetName = interaction.options.getString('cadet_name').trim().toLowerCase();
 		const toName = interaction.options.getString('to_name').trim();
-		const rank = interaction.options.getString('rank').trim();
 		const reason = interaction.options.getString('reason').trim();
+		if (!getInstructor(toName)) {
+			return interaction.editReply(`**${toName}** is not on the instructor roster. Use \`/instructor add\` first.`);
+		}
+
 		const state = readState();
 		const entry = Object.values(state.processed).find(
 			item => typeof item.name === 'string' && item.name.toLowerCase() === targetName
@@ -107,7 +111,7 @@ module.exports = {
 			const thread = await interaction.client.channels.fetch(entry.threadId);
 			await thread.setName(`FIRED | ${entry.name}`.slice(0, 100));
 			await thread.send({
-				content: buildFireNotice({ toName, rank, reason })
+				content: buildFireNotice({ toName, reason })
 			});
 			await thread.setArchived(true);
 			state.processed[entry.messageId] = { messageId: entry.messageId };
@@ -120,12 +124,17 @@ module.exports = {
 	},
 
 	async autocomplete(interaction) {
-		const roleId = getCommandRole(interaction.guildId, 'fire');
+		const roleId = getCommandRole(interaction.guildId, 'training_officer');
 		if (!roleId || !interaction.member.roles.cache.has(roleId)) {
 			return interaction.respond([]);
 		}
 
-		const focusedValue = interaction.options.getFocused().toLowerCase();
+		const focusedOption = interaction.options.getFocused(true);
+		if (focusedOption.name === 'to_name') {
+			return interaction.respond(getInstructorChoices(focusedOption.value));
+		}
+
+		const focusedValue = focusedOption.value.toLowerCase();
 		const seenNames = new Set();
 		const choices = Object.values(readState().processed)
 			.filter(entry => entry.threadId && entry.name)

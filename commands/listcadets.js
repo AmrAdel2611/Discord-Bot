@@ -25,7 +25,7 @@ module.exports = {
 
   async execute(interaction) {
     // 0. Check if the user has the required role
-    const roleId = getCommandRole(interaction.guildId, 'listcadets');
+    const roleId = getCommandRole(interaction.guildId, 'training_officer');
         if (!roleId) {
             return interaction.reply({
                 content: 'The `/listcadets` command has not been configured for this server.',

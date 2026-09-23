@@ -14,7 +14,8 @@ module.exports = {
                     name: 'Training Modules',
                     value: [
                         '`/training` - Post a training completion review.',
-                        '`/cto` - Post a CTO exam result and close passed records.'
+                        '`/cto` - Post a CTO exam result and close passed records.',
+                        '`/performance` - View invite and CTO pass totals by instructor.'
                     ].join('\n')
                 },
                 {
@@ -28,12 +29,20 @@ module.exports = {
                     ].join('\n')
                 },
                 {
+                    name: 'Administration',
+                    value: '`/instructor add/remove` - Manage the instructor roster used by officer autocomplete.'
+                },
+                {
                     name: 'How It Works',
                     value: 'Select a trainee by exact name when prompted, then provide the requested officer, rank, and result information. Results are posted to the trainee forum thread.'
                 },
                 {
                     name: 'Need Access?',
-                    value: 'Cadet commands are limited to the role configured by the bot owner.'
+                    value: [
+                        'The **Training Officer Role** is used for `/cadets`, `/cto`, `/fire`, `/listcadets`, `/reenlist`, `/training`, and `/performance`.',
+                        'The **Command Role** is used for `/refreshlogs`, `/update`, and `/instructor`.',
+                        'The bot owner configures both roles with `/setup`.'
+                    ].join('\n')
                 }
             )
             .setColor(0x2f855a)

@@ -1,23 +1,29 @@
 const { ChannelType, SlashCommandBuilder } = require('discord.js');
 require('dotenv').config();
 
-const { setCommandRole, setGuildChannels } = require('../utils/guildConfig');
+const { setGuildChannels, setRole } = require('../utils/guildConfig');
+
+const trainingOfficerCommands = [
+    'cadets',
+    'cto',
+    'listcadets',
+    'fire',
+    'reenlist',
+    'training',
+    'performance'
+];
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('setup')
-        .setDescription('Configure a role for a bot command in this server')
+        .setDescription('Configure the bot roles and channels in this server')
         .addStringOption(option => option
-            .setName('command')
-            .setDescription('The command to configure')
+            .setName('role_type')
+            .setDescription('The role type to configure')
             .setRequired(true)
             .addChoices(
-                { name: 'cadets', value: 'cadets' },
-                { name: 'cto', value: 'cto' },
-                { name: 'listcadets', value: 'listcadets' },
-                { name: 'fire', value: 'fire' },
-                { name: 'reenlist', value: 'reenlist' },
-                { name: 'training', value: 'training' }
+                { name: 'Training Officer Role', value: 'training_officer' },
+                { name: 'Command Role', value: 'command' }
                 ))
         .addRoleOption(option => option
             .setName('role')
@@ -54,13 +60,18 @@ module.exports = {
             });
         }
 
-        const commandName = interaction.options.getString('command');
+        const roleType = interaction.options.getString('role_type');
         const role = interaction.options.getRole('role');
         const forumChannel = interaction.options.getChannel('forum_channel');
         const setrankChannel = interaction.options.getChannel('setrank_request_channel');
         const inviteLogsChannel = interaction.options.getChannel('invite_logs_channel');
 
-        setCommandRole(interaction.guildId, commandName, role.id);
+        if (roleType === 'training_officer') {
+            setRole(interaction.guildId, 'TrainingOfficer', role.id);
+        } else {
+            setRole(interaction.guildId, 'Command', role.id);
+        }
+
         setGuildChannels(interaction.guildId, {
             forum: forumChannel?.id,
             setrank: setrankChannel?.id,
@@ -75,7 +86,9 @@ module.exports = {
 
         return interaction.reply({
             content: [
-                `Configured **/${commandName}** for the **${role.name}** role.`,
+                roleType === 'training_officer'
+                    ? `Configured the **${role.name}** as the Training Officer role for **/${trainingOfficerCommands.join('**, **/') }**.`
+                    : `Configured the **${role.name}** as the Command role for **/refreshlogs**, **/update**, and **/instructor**.`,
                 configuredChannels.length > 0
                     ? `Configured channels: ${configuredChannels.join(', ')}.`
                     : 'No channel settings were changed.'

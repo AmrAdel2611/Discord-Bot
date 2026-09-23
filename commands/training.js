@@ -1,12 +1,16 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { getCommandRole } = require('../utils/guildConfig');
 const {
+    buildInvitePost,
     readState,
-    writeState,
-    buildInvitePost
-} = require('./cadets');
+    writeState
+} = require('../utils/cadetRecords');
+const {
+    getInstructor,
+    getInstructorChoices
+} = require('../utils/performanceLogs');
 
-function buildTrainingNotice(toName, rank, customTrainings = '') {
+function buildTrainingNotice(toName, customTrainings = '') {
     const now = new Date();
     const day = String(now.getUTCDate()).padStart(2, '0');
     const month = String(now.getUTCMonth() + 1).padStart(2, '0');
@@ -34,7 +38,7 @@ function buildTrainingNotice(toName, rank, customTrainings = '') {
         '```ansi',
         '\u001b[2;32mPerformance review\u001b[0m',
         `\u001b[1;2mCO name: ${toName}`,
-        `Rank: ${rank}`,
+        'Rank: Training Officer',
         `Date: ${dateFormatted}\u001b[0m`,
         '',
         'The results of the performance review:',
@@ -59,10 +63,7 @@ module.exports = {
         .addStringOption(opt => opt
             .setName('to_name')
             .setDescription('Training Officer name')
-            .setRequired(true))
-        .addStringOption(opt => opt
-            .setName('rank')
-            .setDescription('Training Officer rank (e.g., PO III, Sergeant)')
+            .setAutocomplete(true)
             .setRequired(true))
         .addStringOption(opt => opt
             .setName('custom_trainings')
@@ -70,7 +71,7 @@ module.exports = {
             .setRequired(false)),
 
     async execute(interaction) {
-        const roleId = getCommandRole(interaction.guildId, 'training');
+        const roleId = getCommandRole(interaction.guildId, 'training_officer');
         if (!roleId) {
             return interaction.reply({
                 content: 'The `/training` command has not been configured for this server.',
@@ -88,8 +89,11 @@ module.exports = {
         await interaction.deferReply({ ephemeral: true });
         const cadetName = interaction.options.getString('cadet_name').trim().toLowerCase();
         const toName = interaction.options.getString('to_name').trim();
-        const rank = interaction.options.getString('rank').trim();
         const customTrainings = interaction.options.getString('custom_trainings') || '';
+        if (!getInstructor(toName)) {
+            return interaction.editReply(`**${toName}** is not on the instructor roster. Use \`/instructor add\` first.`);
+        }
+
         const state = readState();
         const entry = Object.values(state.processed).find(
             item => typeof item.name === 'string' && item.name.toLowerCase() === cadetName
@@ -101,7 +105,7 @@ module.exports = {
 
         try {
             const thread = await interaction.client.channels.fetch(entry.threadId);
-            const notice = buildTrainingNotice(toName, rank, customTrainings);
+            const notice = buildTrainingNotice(toName, customTrainings);
             await thread.send({ content: notice });
             entry.trainings = 'Done';
             const starterMessage = await thread.fetchStarterMessage();
@@ -115,12 +119,17 @@ module.exports = {
     },
 
     async autocomplete(interaction) {
-        const roleId = getCommandRole(interaction.guildId, 'training');
+        const roleId = getCommandRole(interaction.guildId, 'training_officer');
         if (!roleId || !interaction.member.roles.cache.has(roleId)) {
             return interaction.respond([]);
         }
 
-        const focusedValue = interaction.options.getFocused().toLowerCase();
+        const focusedOption = interaction.options.getFocused(true);
+        if (focusedOption.name === 'to_name') {
+            return interaction.respond(getInstructorChoices(focusedOption.value));
+        }
+
+        const focusedValue = focusedOption.value.toLowerCase();
         const seenNames = new Set();
         const choices = Object.values(readState().processed)
             .filter(entry => entry.threadId && entry.name)
