@@ -43,6 +43,11 @@ module.exports = {
             .setName('invite_logs_channel')
             .setDescription('Text channel containing invite logs')
             .addChannelTypes(ChannelType.GuildText)
+            .setRequired(false))
+        .addChannelOption(option => option
+            .setName('blacklist_channel')
+            .setDescription('Text channel for blacklist logs')
+            .addChannelTypes(ChannelType.GuildText)
             .setRequired(false)),
 
     async execute(interaction) {
@@ -65,6 +70,7 @@ module.exports = {
         const forumChannel = interaction.options.getChannel('forum_channel');
         const setrankChannel = interaction.options.getChannel('setrank_request_channel');
         const inviteLogsChannel = interaction.options.getChannel('invite_logs_channel');
+        const blacklistChannel = interaction.options.getChannel('blacklist_channel');
 
         if (roleType === 'training_officer') {
             setRole(interaction.guildId, 'TrainingOfficer', role.id);
@@ -75,13 +81,15 @@ module.exports = {
         setGuildChannels(interaction.guildId, {
             forum: forumChannel?.id,
             setrank: setrankChannel?.id,
-            inviteLogs: inviteLogsChannel?.id
+            inviteLogs: inviteLogsChannel?.id,
+            blacklist: blacklistChannel?.id
         });
 
         const configuredChannels = [
             forumChannel && `forum: <#${forumChannel.id}>`,
             setrankChannel && `setrank: <#${setrankChannel.id}>`,
-            inviteLogsChannel && `invite logs: <#${inviteLogsChannel.id}>`
+            inviteLogsChannel && `invite logs: <#${inviteLogsChannel.id}>`,
+            blacklistChannel && `blacklist: <#${blacklistChannel.id}>`
         ].filter(Boolean);
 
         return interaction.reply({

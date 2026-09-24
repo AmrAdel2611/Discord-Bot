@@ -44,14 +44,6 @@ client.on('interactionCreate', async interaction => {
     }
 
     if (interaction.isAutocomplete()) {
-        const focusedOption = interaction.options.getFocused(true);
-        if (interaction.commandName === 'faction') {
-            const subcommand = interaction.options.getSubcommand(false);
-            if (subcommand === 'edit' && focusedOption.name === 'countrycode') {
-                return autoCompleteCountry(interaction);
-            }
-        }
-
         const command = client.commands.get(interaction.commandName);
         if (command && command.autocomplete) {
             await command.autocomplete(interaction);

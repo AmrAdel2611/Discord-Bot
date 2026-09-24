@@ -15,22 +15,26 @@ module.exports = {
                     value: [
                         '`/training` - Post a training completion review.',
                         '`/cto` - Post a CTO exam result and close passed records.',
-                        '`/performance` - View invite and CTO pass totals by instructor.'
                     ].join('\n')
                 },
                 {
-                    name: 'Trainee Logs',
+                    name: 'Training Officeer Commands',
                     value: [
                         '`/cadets edit` - Update a trainee record with PR, MAIN/ALT.',
                         '`/fire` - Post a disciplinary firing note in a cadet thread.',
                         '`/reenlist` - Post a reenlistment note in a cadet thread.',
-                        '`/refreshlogs` - Manually import recent invite logs into the cadet forum. Please don\'t use this command unless you are sure there are OLD logs to import.',
                         '`/listcadets` - View cadets with rank, country, and last online information.'
                     ].join('\n')
                 },
                 {
-                    name: 'Administration',
-                    value: '`/instructor add/remove` - Manage the instructor roster used by officer autocomplete.'
+                    name: 'SAPA Command Role Commands',
+                    value: [
+                        '`/instructor add/remove` - Manage the instructor roster used by officer autocomplete.',
+                        '`/performance` - View invite and CTO pass totals by instructor.',
+                        '`/blacklist add/remove/search` - Manage the blacklist and view logs for blacklisted users.',
+                        '`/refreshlogs` - Manually import recent invite logs into the cadet forum. Please don\'t use this command unless you are sure there are OLD logs to import.'
+
+                    ].join('\n')
                 },
                 {
                     name: 'How It Works',
@@ -40,8 +44,8 @@ module.exports = {
                     name: 'Need Access?',
                     value: [
                         'The **Training Officer Role** is used for `/cadets`, `/cto`, `/fire`, `/listcadets`, `/reenlist`, `/training`, and `/performance`.',
-                        'The **Command Role** is used for `/refreshlogs`, `/update`, and `/instructor`.',
-                        'The bot owner configures both roles with `/setup`.'
+                        'The **Training Command Role** is used for `/refreshlogs`, `/update`, `/instructor`, and `/blacklist`.',
+                        'If you need access to either role, please contact a bot administrator.'
                     ].join('\n')
                 }
             )

@@ -1,0 +1,40 @@
+{
+  "embedConfig": {
+    "channelId": "1552711367675482244",
+    "messageId": "1552757393878687855"
+  },
+  "bl_users": [
+    "Arcticia Chiwawa",
+    "Niko_Gotti",
+    "Miha"
+  ],
+  "logs": [
+    {
+      "logId": "BL-MUFWWRCP",
+      "user": "Arcticia Chiwawa",
+      "reason": "Disruptive Behavior / Low RP",
+      "length": "Permanent",
+      "ucpLink": "https://sa-mp.im/player/215083/Arcticia_Chiwawa",
+      "interviewer": "Narcotti",
+      "date": "24.09.2026"
+    },
+    {
+      "logId": "BL-MUFX95WK",
+      "user": "Niko_Gotti",
+      "reason": "Dumb Fuck",
+      "length": "3d",
+      "ucpLink": "https://sa-mp.im/player/",
+      "interviewer": "Mihael_Bourne",
+      "date": "24.09.2026"
+    },
+    {
+      "logId": "BL-MUFY3VJE",
+      "user": "Miha",
+      "reason": "29875634",
+      "length": "1d",
+      "ucpLink": "3497856",
+      "interviewer": "Niko",
+      "date": "24.09.2026"
+    }
+  ]
+}
