@@ -1,7 +1,7 @@
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 require('dotenv').config();
 
-const { getCommandRole } = require('../utils/guildConfig');
+const { getCommandRoles } = require('../utils/guildConfig');
 const { readState: readCadetState } = require('../utils/cadetRecords');
 const { syncInviteRecords } = require('../utils/performanceLogs');
 
@@ -45,15 +45,15 @@ module.exports = {
         .setDescription('View performance information of all Training Officers.'),
 
     async execute(interaction) {
-        const roleId = getCommandRole(interaction.guildId, 'training_officer');
-        if (!roleId) {
+        const roleIds = getCommandRoles(interaction.guildId, 'training_officer');
+        if (roleIds.length === 0) {
             return interaction.reply({
                 content: 'The `/performance` command has not been configured for this server.',
                 ephemeral: true
             });
         }
 
-        if (!interaction.member.roles.cache.has(roleId)) {
+        if (!roleIds.some(roleId => interaction.member.roles.cache.has(roleId))) {
             return interaction.reply({
                 content: 'You do not have the role required to use `/performance`.',
                 ephemeral: true

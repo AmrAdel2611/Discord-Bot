@@ -1,11 +1,12 @@
 const { SlashCommandBuilder } = require('discord.js');
 require('dotenv').config();
 
-const { getCommandRole, getGuildChannel } = require('../utils/guildConfig');
+const { getCommandRoles, getGuildChannel } = require('../utils/guildConfig');
 const setRankChannelId = process.env.SET_RANK_CHANNEL_ID;
 
 const {
     buildInvitePost,
+    isPassedAndClosed,
     readState,
     writeState
 } = require('../utils/cadetRecords');
@@ -75,15 +76,15 @@ module.exports = {
                 .setRequired(false))),
 
     async execute(interaction) {
-        const roleId = getCommandRole(interaction.guildId, 'training_officer');
-        if (!roleId) {
+        const roleIds = getCommandRoles(interaction.guildId, 'training_officer');
+        if (roleIds.length === 0) {
             return interaction.reply({
                 content: 'The `/cadets` command has not been configured for this server.',
                 ephemeral: true
             });
         }
 
-        if (!interaction.member.roles.cache.has(roleId)) {
+        if (!roleIds.some(roleId => interaction.member.roles.cache.has(roleId))) {
             return interaction.reply({
                 content: 'You do not have the role required to use `/cadets`.',
                 ephemeral: true
@@ -176,8 +177,8 @@ module.exports = {
     },
 
     async autocomplete(interaction) {
-        const roleId = getCommandRole(interaction.guildId, 'training_officer');
-        if (!roleId || !interaction.member.roles.cache.has(roleId)) {
+        const roleIds = getCommandRoles(interaction.guildId, 'training_officer');
+        if (!roleIds.some(roleId => interaction.member.roles.cache.has(roleId))) {
             return interaction.respond([]);
         }
 
@@ -185,6 +186,7 @@ module.exports = {
         const seenNames = new Set();
         const choices = Object.values(readState().processed)
             .filter(entry => entry.threadId && entry.name)
+            .filter(entry => !isPassedAndClosed(entry))
             .filter(entry => entry.name.toLowerCase().includes(focusedValue))
             .filter(entry => {
                 const normalizedName = entry.name.toLowerCase();

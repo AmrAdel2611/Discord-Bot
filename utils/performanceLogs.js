@@ -4,14 +4,13 @@ const path = require('path');
 const statePath = path.join(__dirname, '..', 'performance_logs.json');
 const inviteStatePath = path.join(__dirname, '..', 'invite_logs.json');
 
-function normalizeState(state) {
-    const instructors = Array.isArray(state?.instructors) ? state.instructors : [];
-    const instructorNames = new Set(instructors.map(instructor => normalizeName(instructor)));
+function normalizePerformanceState(state) {
+    const source = state && typeof state === 'object' && !Array.isArray(state) ? state : {};
 
     return {
-        instructors,
-        events: (Array.isArray(state?.events) ? state.events : [])
-            .filter(event => event?.instructor && instructorNames.has(normalizeName(event.instructor)))
+        ...source,
+        instructors: Array.isArray(source.instructors) ? source.instructors : [],
+        events: Array.isArray(source.events) ? source.events : []
     };
 }
 
@@ -21,7 +20,7 @@ function readPerformanceState() {
     }
 
     try {
-        const state = normalizeState(JSON.parse(fs.readFileSync(statePath, 'utf8')));
+        const state = normalizePerformanceState(JSON.parse(fs.readFileSync(statePath, 'utf8')));
         writePerformanceState(state);
         return state;
     } catch (error) {
@@ -31,7 +30,7 @@ function readPerformanceState() {
 }
 
 function writePerformanceState(state) {
-    fs.writeFileSync(statePath, JSON.stringify(normalizeState(state), null, 2));
+    fs.writeFileSync(statePath, JSON.stringify(normalizePerformanceState(state), null, 2));
 }
 
 function normalizeName(name) {
@@ -201,6 +200,7 @@ module.exports = {
     addInstructor,
     getInstructor,
     getInstructorChoices,
+    normalizePerformanceState,
     readPerformanceState,
     recordCto,
     recordInvite,

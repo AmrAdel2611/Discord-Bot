@@ -160,6 +160,23 @@
       "cadet": "Test_Krasniqi",
       "date": "23.09.2026",
       "recordedAt": "2026-09-23T18:47:52.024Z"
+    },
+    {
+      "id": "invite:1555300545022005390",
+      "type": "invite",
+      "instructor": "Nicholas_Roselli",
+      "cadet": "Vincenzo_Pearce",
+      "date": "01.10.2026",
+      "recordedAt": "2026-10-01T19:29:06.463Z"
+    },
+    {
+      "id": "cto:1555300545022005390:1790883022696",
+      "type": "cto",
+      "instructor": "Niko_Gotti",
+      "cadet": "Vincenzo_Pearce",
+      "result": "Passed",
+      "date": "2026-10-01",
+      "recordedAt": "2026-10-01T19:30:22.698Z"
     }
   ]
 }

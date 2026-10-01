@@ -6,7 +6,9 @@
   "bl_users": [
     "Arcticia Chiwawa",
     "Niko_Gotti",
-    "Miha"
+    "Miha",
+    "test2",
+    "tes22t2"
   ],
   "logs": [
     {
@@ -35,6 +37,24 @@
       "ucpLink": "3497856",
       "interviewer": "Niko",
       "date": "24.09.2026"
+    },
+    {
+      "logId": "BL-MUPXY7P5",
+      "user": "test2",
+      "reason": "testing",
+      "length": "1d",
+      "ucpLink": "w2123123",
+      "interviewer": "Niks the boss",
+      "date": "01.10.2026"
+    },
+    {
+      "logId": "BL-MUPXYM2Y",
+      "user": "tes22t2",
+      "reason": "testi22ng",
+      "length": "1d",
+      "ucpLink": "w212312322",
+      "interviewer": "Niks the22 boss",
+      "date": "01.10.2026"
     }
   ]
 }

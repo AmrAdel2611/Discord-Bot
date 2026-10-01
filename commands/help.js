@@ -22,8 +22,7 @@ module.exports = {
                     value: [
                         '`/cadets edit` - Update a trainee record with PR, MAIN/ALT.',
                         '`/fire` - Post a disciplinary firing note in a cadet thread.',
-                        '`/reenlist` - Post a reenlistment note in a cadet thread.',
-                        '`/listcadets` - View cadets with rank, country, and last online information.'
+                        '`/reenlist` - Post a reenlistment note in a cadet thread.'
                     ].join('\n')
                 },
                 {
@@ -43,8 +42,8 @@ module.exports = {
                 {
                     name: 'Need Access?',
                     value: [
-                        'The **Training Officer Role** is used for `/cadets`, `/cto`, `/fire`, `/listcadets`, `/reenlist`, `/training`, and `/performance`.',
-                        'The **Training Command Role** is used for `/refreshlogs`, `/update`, `/instructor`, and `/blacklist`.',
+                        'The **Training Officer** or **Command** role can use `/cadets`, `/cto`, `/fire`, `/reenlist`, `/training`, `/performance`, and `/blacklist`.',
+                        'The **Command** role is required for `/refreshlogs`, `/update`, and `/instructor`.',
                         'If you need access to either role, please contact a bot administrator.'
                     ].join('\n')
                 }

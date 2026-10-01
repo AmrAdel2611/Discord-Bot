@@ -1,6 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const { 
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
     TextDisplayBuilder,
     SeparatorBuilder,
     MessageFlags,
@@ -34,19 +37,32 @@ function getFormattedDate() {
 
 // State Functions
 
-function normalizeState(state) {
-    const bl_users = Array.isArray(state?.bl_users) ? state.bl_users : [];
-    const validUsers = new Set(bl_users.map(user => normalizeName(user)));
+function normalizeBlacklistState(state) {
+    const source = state && typeof state === 'object' && !Array.isArray(state) ? state : {};
+    const embedConfig = source.embedConfig === undefined ? {} : source.embedConfig;
+    if (!embedConfig || typeof embedConfig !== 'object' || Array.isArray(embedConfig)) {
+        throw new Error('Blacklist embedConfig must be an object.');
+    }
+    if (source.bl_users !== undefined && !Array.isArray(source.bl_users)) {
+        throw new Error('Blacklist bl_users must be an array.');
+    }
+    if (source.logs !== undefined && !Array.isArray(source.logs)) {
+        throw new Error('Blacklist logs must be an array.');
+    }
+
+    const normalizedEmbedConfig = { ...embedConfig };
+    if (!Object.prototype.hasOwnProperty.call(normalizedEmbedConfig, 'channelId')) {
+        normalizedEmbedConfig.channelId = null;
+    }
+    if (!Object.prototype.hasOwnProperty.call(normalizedEmbedConfig, 'messageId')) {
+        normalizedEmbedConfig.messageId = null;
+    }
 
     return {
-        embedConfig: {
-            channelId: state?.embedConfig?.channelId || null,
-            messageId: state?.embedConfig?.messageId || null
-        },
-        bl_users,
-        logs: (Array.isArray(state?.logs) ? state.logs : []).filter(
-            log => log?.user && validUsers.has(normalizeName(log.user))
-        ),
+        ...source,
+        embedConfig: normalizedEmbedConfig,
+        bl_users: Array.isArray(source.bl_users) ? source.bl_users : [],
+        logs: Array.isArray(source.logs) ? source.logs : []
     }
 }
 
@@ -60,7 +76,7 @@ function readBlacklistState() {
     }
 
     try {
-        const state = normalizeState(JSON.parse(fs.readFileSync(statePath, 'utf8')));
+        const state = normalizeBlacklistState(JSON.parse(fs.readFileSync(statePath, 'utf8')));
         writeBlacklistState(state);
         return state;
     } catch (error) {
@@ -72,7 +88,7 @@ function readBlacklistState() {
 function writeBlacklistState(state) {
     try {
         // Run state through normalizeState to ensure only clean data gets saved
-        const cleanState = normalizeState(state);
+        const cleanState = normalizeBlacklistState(state);
         
         fs.writeFileSync(
             statePath,
@@ -147,12 +163,16 @@ function getUserLogs(user) {
     const state = readBlacklistState();
     const normalizedUser = normalizeName(user);
     const logs = Array.isArray(state?.logs) ? state.logs : [];
-    return logs.filter(log => normalizeName(log.user) === normalizedUser);
+    return logs.filter(log => typeof log?.user === 'string' && normalizeName(log.user) === normalizedUser);
 }
 
 // Container Building/Updating Functions
 
-function buildContainerList(state) {
+function buildContainerList(state, requestedPage = 0) {
+    const pageSize = 5;
+    const pageCount = Math.max(1, Math.ceil(state.bl_users.length / pageSize));
+    const page = Math.max(0, Math.min(Number.isInteger(requestedPage) ? requestedPage : 0, pageCount - 1));
+    const users = state.bl_users.slice(page * pageSize, (page + 1) * pageSize);
     const container = new ContainerBuilder()
         .setAccentColor(0xFF0000);
 
@@ -173,10 +193,11 @@ function buildContainerList(state) {
         );
     } else {
         // Display each blacklisted user and their logs
-        state.bl_users.forEach((username, index) => {
+        users.forEach((username, index) => {
             const userLogs = getUserLogs(username);
             const latestLog = userLogs[userLogs.length - 1];
-            let content = `### [**${(index + 1).toString().padStart(2, '0')}] ${username}**\n`;
+            const entryNumber = page * pageSize + index + 1;
+            let content = `### [**${entryNumber.toString().padStart(2, '0')}] ${username}**\n`;
 
             if (latestLog) {
                 content += '• **Duration:** ' + latestLog.length + ' | ';
@@ -200,8 +221,37 @@ function buildContainerList(state) {
     // Footer
     container.addTextDisplayComponents(
         new TextDisplayBuilder()
-            .setContent(`Last Updated: ${getFormattedDate()}, use \`/blacklist [add/remove]\` to manage entries.`)
+            .setContent(`Last Updated: ${getFormattedDate()}${pageCount > 1 ? ` • Page ${page + 1}/${pageCount}` : ''}`)
     );
+
+    const buttons = [];
+    if (state.bl_users.length > pageSize) {
+        buttons.push(
+            new ButtonBuilder()
+                .setCustomId(`blacklist:previous:${page}`)
+                .setLabel('Previous')
+                .setStyle(ButtonStyle.Secondary)
+                .setDisabled(page === 0),
+            new ButtonBuilder()
+                .setCustomId(`blacklist:next:${page}`)
+                .setLabel('Next')
+                .setStyle(ButtonStyle.Secondary)
+                .setDisabled(page === pageCount - 1)
+        );
+    }
+
+    buttons.push(
+        new ButtonBuilder()
+            .setCustomId('blacklist:add')
+            .setLabel('Add')
+            .setStyle(ButtonStyle.Success),
+        new ButtonBuilder()
+            .setCustomId('blacklist:remove')
+            .setLabel('Remove')
+            .setStyle(ButtonStyle.Danger)
+    );
+
+    container.addActionRowComponents(new ActionRowBuilder().addComponents(...buttons));
 
     return container;
 }
@@ -310,9 +360,11 @@ async function updateLiveBlacklistEmbed(interaction) {
 // Exporting the functions for use in other modules
 module.exports = {
     readBlacklistState,
+    normalizeBlacklistState,
     addBlacklistUser,
     removeBlackListUser,
     getUserLogs,
+    buildContainerList,
     buildContainerListForUser,
     updateLiveBlacklistEmbed
 }

@@ -104,6 +104,13 @@ function buildInvitePost(invite) {
     ].join('\n');
 }
 
+function isPassedAndClosed(entry) {
+    const passed = entry.ctoResult?.toLowerCase() === 'passed'
+        || /^passed(?:\s|$)/i.test(entry.ctoExam || '');
+    const closed = entry.closed === true || entry.isclosed === true || entry.isClosed === true;
+    return passed && closed;
+}
+
 async function postInvite(client, guildId, invite) {
     const channelId = getGuildChannel(guildId, 'forum', outputChannelId);
     if (!channelId) {
@@ -203,6 +210,7 @@ async function refreshInviteLogs(interaction) {
 
 module.exports = {
     buildInvitePost,
+    isPassedAndClosed,
     parseInviteLog,
     postInvite,
     processInviteMessage,

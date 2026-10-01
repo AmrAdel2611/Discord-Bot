@@ -1,12 +1,90 @@
-const { SlashCommandBuilder, MessageFlags } = require('discord.js');
-const { getCommandRole } = require('../utils/guildConfig');
+const {
+    ActionRowBuilder,
+    MessageFlags,
+    ModalBuilder,
+    SlashCommandBuilder,
+    TextInputBuilder,
+    TextInputStyle
+} = require('discord.js');
+const { getCommandRoles } = require('../utils/guildConfig');
 const {
     readBlacklistState,
     addBlacklistUser,
     removeBlackListUser,
     getUserLogs,
+    buildContainerList,
     buildContainerListForUser,
     updateLiveBlacklistEmbed } = require('../utils/blacklistLogs.js');
+
+function hasBlacklistAccess(interaction) {
+    const roleIds = getCommandRoles(interaction.guildId, 'training_officer');
+    return roleIds.some(roleId => interaction.member?.roles?.cache?.has(roleId));
+}
+
+function buildAddModal(interaction) {
+    return new ModalBuilder()
+        .setCustomId('blacklist:add:submit')
+        .setTitle('Add Blacklist Entry')
+        .addComponents(
+            new ActionRowBuilder().addComponents(
+                new TextInputBuilder()
+                    .setCustomId('ig_name')
+                    .setLabel('In-game name')
+                    .setStyle(TextInputStyle.Short)
+                    .setRequired(true)
+                    .setMaxLength(100)
+            ),
+            new ActionRowBuilder().addComponents(
+                new TextInputBuilder()
+                    .setCustomId('interviewer')
+                    .setLabel('Interviewer')
+                    .setStyle(TextInputStyle.Short)
+                    .setValue((interaction.member?.displayName || interaction.user.username).slice(0, 100))
+                    .setRequired(true)
+                    .setMaxLength(100)
+            ),
+            new ActionRowBuilder().addComponents(
+                new TextInputBuilder()
+                    .setCustomId('reason')
+                    .setLabel('Reason')
+                    .setStyle(TextInputStyle.Paragraph)
+                    .setRequired(true)
+                    .setMaxLength(1000)
+            ),
+            new ActionRowBuilder().addComponents(
+                new TextInputBuilder()
+                    .setCustomId('length')
+                    .setLabel('Duration: 1d, 3d, 1w, 2w, or Permanent')
+                    .setStyle(TextInputStyle.Short)
+                    .setRequired(true)
+                    .setMaxLength(20)
+            ),
+            new ActionRowBuilder().addComponents(
+                new TextInputBuilder()
+                    .setCustomId('ucp_link')
+                    .setLabel('UCP link')
+                    .setStyle(TextInputStyle.Short)
+                    .setRequired(true)
+                    .setMaxLength(200)
+            )
+        );
+}
+
+function buildRemoveModal() {
+    return new ModalBuilder()
+        .setCustomId('blacklist:remove:submit')
+        .setTitle('Remove Blacklist Entry')
+        .addComponents(
+            new ActionRowBuilder().addComponents(
+                new TextInputBuilder()
+                    .setCustomId('ig_name')
+                    .setLabel('Exact in-game name')
+                    .setStyle(TextInputStyle.Short)
+                    .setRequired(true)
+                    .setMaxLength(100)
+            )
+        );
+}
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -61,17 +139,17 @@ module.exports = {
                 .setRequired(true))),
 
     async execute(interaction) {
-        const roleId = getCommandRole(interaction.guildId, 'command');
-        if (!roleId) {
+        const roleIds = getCommandRoles(interaction.guildId, 'training_officer');
+        if (roleIds.length === 0) {
             return interaction.reply({
-                content: 'The Command role has not been configured for this server.',
+                content: 'The Training Officer and Command roles have not been configured for this server.',
                 ephemeral: true
             });
         }
 
-        if (!interaction.member.roles.cache.has(roleId)) {
+        if (!roleIds.some(roleId => interaction.member.roles.cache.has(roleId))) {
             return interaction.reply({
-                content: 'You do not have the role required to use `/blacklist`.',
+                content: 'You need the Training Officer or Command role to use `/blacklist`.',
                 ephemeral: true
             });
         }
@@ -148,8 +226,8 @@ module.exports = {
 
     async autocomplete(interaction) {
         // 1. Role permission check (adjust role key if your guilds.json uses 'command')
-        const roleId = getCommandRole(interaction.guildId, 'command');
-        if (!roleId || !interaction.member.roles.cache.has(roleId)) {
+        const roleIds = getCommandRoles(interaction.guildId, 'training_officer');
+        if (!roleIds.some(roleId => interaction.member.roles.cache.has(roleId))) {
             return interaction.respond([]);
         }
 
@@ -165,5 +243,121 @@ module.exports = {
             .map(username => ({ name: username, value: username }));
 
         await interaction.respond(choices);
+    },
+
+    async handleButton(interaction) {
+        if (!hasBlacklistAccess(interaction)) {
+            return interaction.reply({
+            content: 'You need the Training Officer or Command role to manage the blacklist.',
+                ephemeral: true
+            });
+        }
+
+        const [, action, pageValue] = interaction.customId.split(':');
+        if (action === 'previous' || action === 'next') {
+            const currentPage = Number(pageValue);
+            if (!Number.isInteger(currentPage)) {
+                return interaction.reply({ content: 'That blacklist page is invalid.', ephemeral: true });
+            }
+
+            try {
+                const state = readBlacklistState();
+                const pageSize = 5;
+                const pageCount = Math.ceil(state.bl_users.length / pageSize);
+                const lastPage = Math.max(0, pageCount - 1);
+                const requestedPage = currentPage + (action === 'next' ? 1 : -1);
+                const clampedPage = Math.max(0, Math.min(requestedPage, lastPage));
+                const pageEntries = state.bl_users.slice(
+                    clampedPage * pageSize,
+                    (clampedPage + 1) * pageSize
+                );
+                const safePage = pageEntries.length > 0 || state.bl_users.length === 0
+                    ? clampedPage
+                    : lastPage;
+
+                return await interaction.update({
+                    components: [buildContainerList(state, safePage)],
+                    flags: MessageFlags.IsComponentsV2
+                });
+            } catch (error) {
+                console.error('Failed to update blacklist page:', error);
+                await interaction.reply({
+                    content: 'Could not load that blacklist page. Please try again.',
+                    ephemeral: true
+                }).catch(() => null);
+                return null;
+            }
+        }
+
+        if (action === 'add') {
+            return interaction.showModal(buildAddModal(interaction));
+        }
+
+        if (action === 'remove') {
+            return interaction.showModal(buildRemoveModal());
+        }
+
+        return interaction.reply({ content: 'That blacklist action is not supported.', ephemeral: true });
+    },
+
+    async handleModal(interaction) {
+        if (!hasBlacklistAccess(interaction)) {
+            return interaction.reply({
+            content: 'You need the Training Officer or Command role to manage the blacklist.',
+                ephemeral: true
+            });
+        }
+
+        if (interaction.customId === 'blacklist:add:submit') {
+            const igName = interaction.fields.getTextInputValue('ig_name').trim();
+            const interviewer = interaction.fields.getTextInputValue('interviewer').trim();
+            const reason = interaction.fields.getTextInputValue('reason').trim();
+            const enteredLength = interaction.fields.getTextInputValue('length').trim();
+            const ucpLink = interaction.fields.getTextInputValue('ucp_link').trim();
+            const normalizedLength = enteredLength.toLowerCase();
+            const length = normalizedLength === 'permanent'
+                ? 'Permanent'
+                : normalizedLength;
+
+            if (!['1d', '3d', '1w', '2w', 'Permanent'].includes(length)) {
+                return interaction.reply({
+                    content: 'Duration must be `1d`, `3d`, `1w`, `2w`, or `Permanent`.',
+                    ephemeral: true
+                });
+            }
+
+            const result = await addBlacklistUser(igName, reason, length, ucpLink, interviewer);
+            if (!result.added) {
+                return interaction.reply({
+                    content: `Could not add user to blacklist: ${result.reason}`,
+                    ephemeral: true
+                });
+            }
+
+            await updateLiveBlacklistEmbed(interaction);
+            return interaction.reply({
+                content: `User **${igName}** has been added to the blacklist.`,
+                ephemeral: true
+            });
+        }
+
+        if (interaction.customId === 'blacklist:remove:submit') {
+            const igName = interaction.fields.getTextInputValue('ig_name').trim();
+            const result = await removeBlackListUser(igName);
+            if (!result.removed) {
+                return interaction.reply({
+                    content: `Could not remove user from blacklist: ${result.reason}`,
+                    ephemeral: true
+                });
+            }
+
+            await updateLiveBlacklistEmbed(interaction);
+            return interaction.reply({
+                content: `User **${igName}** has been removed from the blacklist.`,
+                ephemeral: true
+            });
+        }
+
+        return interaction.reply({ content: 'That blacklist form is not supported.', ephemeral: true });
     }
 }

@@ -38,6 +38,15 @@ function getCommandRole(guildId, roleType) {
         || null;
 }
 
+function getCommandRoles(guildId, roleType) {
+    const roleIds = [getCommandRole(guildId, roleType)];
+    if (roleType === 'training_officer') {
+        roleIds.push(getCommandRole(guildId, 'command'));
+    }
+
+    return [...new Set(roleIds.filter(Boolean))];
+}
+
 function setGuildChannels(guildId, channels) {
     const guilds = readGuilds();
     const guild = guilds[guildId] || { commands: {} };
@@ -56,4 +65,4 @@ function getGuildChannel(guildId, channelName, fallback = null) {
     return readGuilds()[guildId]?.channels?.[channelName] || fallback;
 }
 
-module.exports = { getCommandRole, getGuildChannel, setGuildChannels, setRole };
+module.exports = { getCommandRole, getCommandRoles, getGuildChannel, setGuildChannels, setRole };

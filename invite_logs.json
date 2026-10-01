@@ -273,6 +273,20 @@
       "trainings": "TBD",
       "ctoExam": "TBD",
       "threadId": "1552391056547385354"
+    },
+    "1555300545022005390": {
+      "messageId": "1555300545022005390",
+      "name": "Vincenzo_Pearce",
+      "invitedBy": "Nicholas_Roselli",
+      "date": "01.10.2026",
+      "accountType": "Main",
+      "isSO": true,
+      "trainings": "TBD",
+      "ctoExam": "Passed (01.10.2026)",
+      "threadId": "1555300546607587348",
+      "ctoResult": "Passed",
+      "ctoOfficer": "Niko_Gotti",
+      "closed": true
     }
   }
 }

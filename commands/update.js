@@ -5,9 +5,98 @@ require('dotenv').config();
 
 const { getCommandRole, getGuildChannel } = require('../utils/guildConfig');
 const { syncInviteRecordsFromDatabase } = require('../utils/performanceLogs');
+const { updateLiveBlacklistEmbed } = require('../utils/blacklistLogs');
 
 const statePath = path.join(__dirname, '..', 'invite_logs.json');
 const setRankChannelId = process.env.SET_RANK_CHANNEL_ID;
+
+function isRecord(value) {
+    return value !== null && typeof value === 'object' && !Array.isArray(value);
+}
+
+function hasOwn(value, key) {
+    return Object.prototype.hasOwnProperty.call(value, key);
+}
+
+function readJsonRecord(fileName, defaultValue) {
+    const filePath = path.join(__dirname, '..', fileName);
+    if (!fs.existsSync(filePath)) {
+        return { fileName, filePath, state: defaultValue };
+    }
+
+    let state;
+    try {
+        state = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    } catch (error) {
+        throw new Error(`Cannot normalize ${fileName}; invalid JSON was left untouched: ${error.message}`);
+    }
+
+    if (!isRecord(state)) {
+        throw new Error(`Cannot normalize ${fileName}; expected a JSON object and left it untouched.`);
+    }
+
+    return { fileName, filePath, state };
+}
+
+function ensureArrayField(state, fieldName, fileName) {
+    if (!hasOwn(state, fieldName)) {
+        state[fieldName] = [];
+    } else if (!Array.isArray(state[fieldName])) {
+        throw new Error(`Cannot normalize ${fileName}; ${fieldName} must be an array and the file was left untouched.`);
+    }
+}
+
+function normalizeRuntimeJsonFiles() {
+    const files = [
+        readJsonRecord('guilds.json', {}),
+        readJsonRecord('invite_logs.json', { processed: {} }),
+        readJsonRecord('blacklist_logs.json', {
+            embedConfig: { channelId: null, messageId: null },
+            bl_users: [],
+            logs: []
+        }),
+        readJsonRecord('performance_logs.json', { instructors: [], events: [] })
+    ];
+    const [guilds, inviteState, blacklistState, performanceState] = files;
+
+    if (!hasOwn(inviteState.state, 'processed')) {
+        inviteState.state.processed = {};
+    } else if (!isRecord(inviteState.state.processed)) {
+        throw new Error('Cannot normalize invite_logs.json; processed must be an object and the file was left untouched.');
+    }
+    for (const entry of Object.values(inviteState.state.processed)) {
+        if (!isRecord(entry)) {
+            continue;
+        }
+        if (!hasOwn(entry, 'isSO')) entry.isSO = false;
+        if (!hasOwn(entry, 'trainings')) entry.trainings = 'TBD';
+        if (!hasOwn(entry, 'ctoExam')) entry.ctoExam = 'TBD';
+        if (!hasOwn(entry, 'accountType')) entry.accountType = 'Main';
+    }
+
+    ensureArrayField(blacklistState.state, 'bl_users', blacklistState.fileName);
+    ensureArrayField(blacklistState.state, 'logs', blacklistState.fileName);
+    if (!hasOwn(blacklistState.state, 'embedConfig')) {
+        blacklistState.state.embedConfig = {};
+    } else if (!isRecord(blacklistState.state.embedConfig)) {
+        throw new Error('Cannot normalize blacklist_logs.json; embedConfig must be an object and the file was left untouched.');
+    }
+    if (!hasOwn(blacklistState.state.embedConfig, 'channelId')) {
+        blacklistState.state.embedConfig.channelId = null;
+    }
+    if (!hasOwn(blacklistState.state.embedConfig, 'messageId')) {
+        blacklistState.state.embedConfig.messageId = null;
+    }
+
+    ensureArrayField(performanceState.state, 'instructors', performanceState.fileName);
+    ensureArrayField(performanceState.state, 'events', performanceState.fileName);
+
+    for (const file of files) {
+        fs.writeFileSync(file.filePath, JSON.stringify(file.state, null, 2));
+    }
+
+    return files.map(file => file.fileName);
+}
 
 function readState() {
     if (!fs.existsSync(statePath)) {
@@ -89,7 +178,7 @@ async function fetchAllMessages(channel) {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('update')
-        .setDescription('Recheck invite records and setrank requests'),
+        .setDescription('Normalize bot data, refresh the blacklist, and recheck setrank requests'),
 
     async execute(interaction) {
         const roleId = getCommandRole(interaction.guildId, 'command');
@@ -110,10 +199,16 @@ module.exports = {
         await interaction.deferReply({ ephemeral: true });
 
         try {
+            const normalizedFiles = normalizeRuntimeJsonFiles();
             const performanceSync = syncInviteRecordsFromDatabase();
+            const blacklistMessage = await updateLiveBlacklistEmbed(interaction);
             const channelId = getGuildChannel(interaction.guildId, 'setrank', setRankChannelId);
             if (!channelId) {
-                return interaction.editReply('The setrank request channel is not configured for this server.');
+                return interaction.editReply([
+                    `Normalized runtime JSON files without removing records: ${normalizedFiles.join(', ')}.`,
+                    `Blacklist message: ${blacklistMessage ? 'refreshed.' : 'not refreshed; check the blacklist channel configuration.'}`,
+                    'The setrank request channel is not configured for this server.'
+                ].join('\n'));
             }
 
             const channel = await interaction.client.channels.fetch(channelId);
@@ -191,6 +286,8 @@ module.exports = {
             }
 
             return interaction.editReply([
+                `Normalized runtime JSON files without removing records: ${normalizedFiles.join(', ')}.`,
+                `Blacklist message: ${blacklistMessage ? 'refreshed.' : 'not refreshed; check the blacklist channel configuration.'}`,
                 `Historical instructor invite logs imported: **${performanceSync.imported}**.`,
                 `Alt records checked: **${altChecked}**.`,
                 `Setrank posts verified: **${verified}**.`,

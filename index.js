@@ -6,9 +6,9 @@ const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
-        ...(process.env.MESSAGE_CONTENT_INTENT === 'true'
-            ? [GatewayIntentBits.MessageContent]
-            : [])
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildMessageReactions
     ]
 });
 
@@ -39,6 +39,15 @@ client.on('interactionCreate', async interaction => {
         const command = client.commands.get(commandName);
         if (command?.handleButton) {
             await command.handleButton(interaction);
+        }
+        return;
+    }
+
+    if (interaction.isModalSubmit()) {
+        const commandName = interaction.customId.split(':')[0];
+        const command = client.commands.get(commandName);
+        if (command?.handleModal) {
+            await command.handleModal(interaction);
         }
         return;
     }

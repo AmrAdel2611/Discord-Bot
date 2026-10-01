@@ -6,7 +6,6 @@ const { setGuildChannels, setRole } = require('../utils/guildConfig');
 const trainingOfficerCommands = [
     'cadets',
     'cto',
-    'listcadets',
     'fire',
     'reenlist',
     'training',
