@@ -46,6 +46,41 @@ function ensureArrayField(state, fieldName, fileName) {
     }
 }
 
+function normalizeBlacklistLogIds(logs) {
+    const usedIds = new Set(
+        logs
+            .filter(isRecord)
+            .map(log => typeof log.logId === 'string' ? log.logId.match(/^BL-(\d+)$/i)?.[1] : null)
+            .filter(Boolean)
+    );
+    let nextId = Date.now();
+    let migratedCount = 0;
+
+    for (const log of logs) {
+        if (!isRecord(log) || (typeof log.logId === 'string' && /^BL-\d+$/i.test(log.logId))) {
+            continue;
+        }
+
+        const oldId = typeof log.logId === 'string'
+            ? log.logId.match(/^BL-([0-9A-Z]+)$/i)?.[1]
+            : null;
+        const decodedId = oldId ? Number.parseInt(oldId, 36) : NaN;
+        let numericId = Number.isSafeInteger(decodedId) && decodedId > 0
+            ? String(decodedId)
+            : String(nextId++);
+
+        while (usedIds.has(numericId)) {
+            numericId = String(nextId++);
+        }
+
+        log.logId = `BL-${numericId}`;
+        usedIds.add(numericId);
+        migratedCount += 1;
+    }
+
+    return migratedCount;
+}
+
 function normalizeRuntimeJsonFiles() {
     const files = [
         readJsonRecord('guilds.json', {}),
@@ -87,6 +122,7 @@ function normalizeRuntimeJsonFiles() {
     if (!hasOwn(blacklistState.state.embedConfig, 'messageId')) {
         blacklistState.state.embedConfig.messageId = null;
     }
+    const migratedLogIds = normalizeBlacklistLogIds(blacklistState.state.logs);
 
     ensureArrayField(performanceState.state, 'instructors', performanceState.fileName);
     ensureArrayField(performanceState.state, 'events', performanceState.fileName);
@@ -95,7 +131,10 @@ function normalizeRuntimeJsonFiles() {
         fs.writeFileSync(file.filePath, JSON.stringify(file.state, null, 2));
     }
 
-    return files.map(file => file.fileName);
+    return {
+        files: files.map(file => file.fileName),
+        migratedLogIds
+    };
 }
 
 function readState() {
@@ -199,13 +238,14 @@ module.exports = {
         await interaction.deferReply({ ephemeral: true });
 
         try {
-            const normalizedFiles = normalizeRuntimeJsonFiles();
+            const { files: normalizedFiles, migratedLogIds } = normalizeRuntimeJsonFiles();
             const performanceSync = syncInviteRecordsFromDatabase();
             const blacklistMessage = await updateLiveBlacklistEmbed(interaction);
             const channelId = getGuildChannel(interaction.guildId, 'setrank', setRankChannelId);
             if (!channelId) {
                 return interaction.editReply([
                     `Normalized runtime JSON files without removing records: ${normalizedFiles.join(', ')}.`,
+                    `Blacklist log IDs converted to numeric format: **${migratedLogIds}**.`,
                     `Blacklist message: ${blacklistMessage ? 'refreshed.' : 'not refreshed; check the blacklist channel configuration.'}`,
                     'The setrank request channel is not configured for this server.'
                 ].join('\n'));

@@ -70,6 +70,34 @@ function normalizeName(name) {
     return name.trim().toLowerCase();
 }
 
+function extractForumName(forumLink) {
+    try {
+        const url = new URL(forumLink);
+        if (!['http:', 'https:'].includes(url.protocol)) return null;
+
+        const forumName = url.pathname.split('/').filter(Boolean).pop();
+        return forumName ? decodeURIComponent(forumName) : null;
+    } catch {
+        return null;
+    }
+}
+
+function formatLink(label, value, linkText) {
+    const link = typeof value === 'string' ? value.trim() : '';
+    if (!link) return `• **${label}:** N/A`;
+
+    try {
+        const url = new URL(link);
+        if (['http:', 'https:'].includes(url.protocol)) {
+            return `• **${label}:** [${linkText || 'Open'}](${url.toString()})`;
+        }
+    } catch {
+        // Preserve existing non-URL values so legacy records remain visible.
+    }
+
+    return `• **${label}:** ${link}`;
+}
+
 function readBlacklistState() {
     if (!fs.existsSync(statePath)) {
         return { bl_users: [], logs: [] };
@@ -115,29 +143,37 @@ function isBlacklisted(user) {
     return found;
 }
 
-function addBlacklistUser(user, reason, length, ucpLink, interviewer) {
+function addBlacklistUser(user, reason, length, ucpLink, interviewer, forumLink) {
     const alreadyExists = isBlacklisted(user);
 
     if (alreadyExists) {
         return { added: false, reason: 'User is already blacklisted' };
     } else {
+        const forumName = extractForumName(forumLink);
+        if (!forumName) {
+            return { added: false, reason: 'Forum link must be a valid URL with a forum name at the end.' };
+        }
+
         // Add the user to the blacklist
         const state = readBlacklistState();
         state.bl_users.push(user);
 
         // Create a log entry
         const logEntry = {
-            logId: `BL-${Date.now().toString(36).toUpperCase()}`, // Unique log ID based on timestamp
+            logId: `BL-${Date.now()}`,
             user: user,
             reason: reason,
             length: length,
             ucpLink: ucpLink,
+            forumLink: forumLink,
+            forumName: forumName,
             interviewer: interviewer || 'Unknown',
             date: getFormattedDate()
         };
 
         // Push & Save the log entry
         state.logs.push(logEntry);
+        state.lastUpdated = logEntry.date;
         writeBlacklistState(state);
         return { added: true, log: logEntry };
     }
@@ -151,10 +187,45 @@ function removeBlackListUser(user) {
     } else {
         // Remove the user from the blacklist
         const state = readBlacklistState();
-        state.bl_users = state.bl_users.filter(blUser => normalizeName(blUser) !== normalizeName(user));
+        const normalizedUser = normalizeName(user);
+        state.bl_users = state.bl_users.filter(blUser => normalizeName(blUser) !== normalizedUser);
+        state.logs = state.logs.filter(log =>
+            typeof log?.user !== 'string' || normalizeName(log.user) !== normalizedUser
+        );
+        state.lastUpdated = getFormattedDate();
         writeBlacklistState(state);
         return { removed: true };
     }
+}
+
+function updateBlacklistUser(logId, updates) {
+    const forumName = extractForumName(updates.forumLink);
+    if (!forumName) {
+        return { updated: false, reason: 'Forum link must be a valid URL with a forum name at the end.' };
+    }
+
+    const state = readBlacklistState();
+    const log = state.logs.find(entry => entry?.logId === logId) ||
+        [...state.logs].reverse().find(
+            entry => typeof entry?.user === 'string' && normalizeName(entry.user) === normalizeName(logId)
+        );
+    if (!log || !state.bl_users.some(
+        blUser => typeof blUser === 'string' && normalizeName(blUser) === normalizeName(log.user)
+    )) {
+        return { updated: false, reason: 'No blacklist record was found for this user.' };
+    }
+
+    Object.assign(log, {
+        reason: updates.reason,
+        length: updates.length,
+        ucpLink: updates.ucpLink,
+        forumLink: updates.forumLink,
+        forumName,
+        interviewer: updates.interviewer
+    });
+    state.lastUpdated = getFormattedDate();
+    writeBlacklistState(state);
+    return { updated: true, log };
 }
 
 // Log Retrieval Function
@@ -162,6 +233,11 @@ function removeBlackListUser(user) {
 function getUserLogs(user) {
     const state = readBlacklistState();
     const normalizedUser = normalizeName(user);
+    const isCurrentlyBlacklisted = state.bl_users.some(
+        blUser => typeof blUser === 'string' && normalizeName(blUser) === normalizedUser
+    );
+    if (!isCurrentlyBlacklisted) return [];
+
     const logs = Array.isArray(state?.logs) ? state.logs : [];
     return logs.filter(log => typeof log?.user === 'string' && normalizeName(log.user) === normalizedUser);
 }
@@ -197,16 +273,8 @@ function buildContainerList(state, requestedPage = 0) {
             const userLogs = getUserLogs(username);
             const latestLog = userLogs[userLogs.length - 1];
             const entryNumber = page * pageSize + index + 1;
-            let content = `### [**${entryNumber.toString().padStart(2, '0')}] ${username}**\n`;
-
-            if (latestLog) {
-                content += '• **Duration:** ' + latestLog.length + ' | ';
-                content += '**Date:** ' + (latestLog.dateOfBl || latestLog.date || 'N/A') + '\n';
-                content += '• **Reason:** ' + latestLog.reason + '\n';
-                content += '• **UCP Link:** ' + (latestLog.ucp || latestLog.ucpLink || 'N/A');
-            } else {
-                content += '• No logs available for this user.\n';
-            }
+            const forumName = latestLog?.forumName || 'N/A';
+            const content = `**[${entryNumber.toString().padStart(2, '0')}] ${username} [${forumName}]**`;
 
             container.addTextDisplayComponents(
                 new TextDisplayBuilder().setContent(content)
@@ -219,9 +287,11 @@ function buildContainerList(state, requestedPage = 0) {
     );
 
     // Footer
+    const latestLog = [...state.logs].reverse().find(log => log.dateOfBl || log.date);
+    const lastUpdated = state.lastUpdated || latestLog?.dateOfBl || latestLog?.date || getFormattedDate();
     container.addTextDisplayComponents(
         new TextDisplayBuilder()
-            .setContent(`Last Updated: ${getFormattedDate()}${pageCount > 1 ? ` • Page ${page + 1}/${pageCount}` : ''}`)
+            .setContent(`Last Updated: ${lastUpdated}${pageCount > 1 ? ` • Page ${page + 1}/${pageCount}` : ''}`)
     );
 
     const buttons = [];
@@ -265,7 +335,7 @@ function buildContainerListForUser(user) {
             .setAccentColor(0xFFE600)
             .addTextDisplayComponents(
                 new TextDisplayBuilder()
-                    .setContent(`No logs found for user: ${user}`)
+                    .setContent(`## No logs found for user: ${user}`)
             );
     }
 
@@ -274,7 +344,7 @@ function buildContainerListForUser(user) {
 
     // Header displaying the target user
     container.addTextDisplayComponents(
-        new TextDisplayBuilder().setContent(`# 📋 Blacklist Record: ${user}\n`)
+        new TextDisplayBuilder().setContent(`## 📋 Blacklist Record: ${user}\n`)
     );
 
     container.addSeparatorComponents(
@@ -282,12 +352,13 @@ function buildContainerListForUser(user) {
     );
 
     // List all available logs (newest first)
-    [...userLogs].reverse().forEach((log, index) => {
-        const content = `### [**LogId: ${log.logId}]**\n` +
-                        `• **Issued By:** ${log.moderator || log.interviewer || 'N/A'}\n` +
-                        `• **Duration:** ${log.length} | **Date:** ${log.dateOfBl || log.date || 'N/A'}\n` +
-                        `• **Reason:** ${log.reason}\n` +
-                        `• **UCP Link:** ${log.ucp || log.ucpLink || 'N/A'}\n`;
+    [...userLogs].reverse().forEach(log => {
+        const forumName = log.forumName || extractForumName(log.forumLink) || 'N/A';
+        const content = `• **Reason:** ${log.reason || 'N/A'}\n` +
+                        `• **Duration:** ${log.length || 'N/A'}\n` +
+                        `• **Date of blacklist:** ${log.dateOfBl || log.date || 'N/A'}\n` +
+                        `${formatLink('UCP Link', log.ucp || log.ucpLink)}\n` +
+                        `${formatLink('Forum Link', log.forumLink, forumName)}`;
 
         container.addTextDisplayComponents(
             new TextDisplayBuilder().setContent(content)
@@ -299,8 +370,11 @@ function buildContainerListForUser(user) {
     );
 
     // Footer
+    const logMetadata = [...userLogs].reverse()
+        .map(log => `Issuer: ${log.moderator || log.interviewer || 'N/A'} | Log ID: ${log.logId || 'N/A'}`)
+        .join(' | ');
     container.addTextDisplayComponents(
-        new TextDisplayBuilder().setContent(`-# Target: ${user} • Checked: <t:${Math.floor(Date.now() / 1000)}:R>`)
+        new TextDisplayBuilder().setContent(`-# ${logMetadata} | Checked: <t:${Math.floor(Date.now() / 1000)}:R>`)
     );
 
     return container;
@@ -363,6 +437,7 @@ module.exports = {
     normalizeBlacklistState,
     addBlacklistUser,
     removeBlackListUser,
+    updateBlacklistUser,
     getUserLogs,
     buildContainerList,
     buildContainerListForUser,

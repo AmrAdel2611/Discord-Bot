@@ -11,6 +11,7 @@ const {
     readBlacklistState,
     addBlacklistUser,
     removeBlackListUser,
+    updateBlacklistUser,
     getUserLogs,
     buildContainerList,
     buildContainerListForUser,
@@ -31,15 +32,6 @@ function buildAddModal(interaction) {
                     .setCustomId('ig_name')
                     .setLabel('In-game name')
                     .setStyle(TextInputStyle.Short)
-                    .setRequired(true)
-                    .setMaxLength(100)
-            ),
-            new ActionRowBuilder().addComponents(
-                new TextInputBuilder()
-                    .setCustomId('interviewer')
-                    .setLabel('Interviewer')
-                    .setStyle(TextInputStyle.Short)
-                    .setValue((interaction.member?.displayName || interaction.user.username).slice(0, 100))
                     .setRequired(true)
                     .setMaxLength(100)
             ),
@@ -66,6 +58,14 @@ function buildAddModal(interaction) {
                     .setStyle(TextInputStyle.Short)
                     .setRequired(true)
                     .setMaxLength(200)
+            ),
+            new ActionRowBuilder().addComponents(
+                new TextInputBuilder()
+                    .setCustomId('forum_link')
+                    .setLabel('Forum link')
+                    .setStyle(TextInputStyle.Short)
+                    .setRequired(true)
+                    .setMaxLength(300)
             )
         );
 }
@@ -83,6 +83,33 @@ function buildRemoveModal() {
                     .setRequired(true)
                     .setMaxLength(100)
             )
+        );
+}
+
+function buildEditModal(user, log) {
+    const buildInput = (customId, label, style, value, maxLength) => {
+        const input = new TextInputBuilder()
+            .setCustomId(customId)
+            .setLabel(label)
+            .setStyle(style)
+            .setRequired(true)
+            .setMaxLength(maxLength);
+
+        if (typeof value === 'string' && value.length > 0) {
+            input.setValue(value.slice(0, maxLength));
+        }
+        return new ActionRowBuilder().addComponents(input);
+    };
+
+    return new ModalBuilder()
+        .setCustomId(`blacklist:edit:submit:${encodeURIComponent(log.logId || user)}`)
+        .setTitle(`Edit ${user}`.slice(0, 45))
+        .addComponents(
+            buildInput('reason', 'Reason', TextInputStyle.Paragraph, log.reason || '', 1000),
+            buildInput('length', 'Duration: 1d, 3d, 1w, 2w, or Permanent', TextInputStyle.Short, log.length || '', 20),
+            buildInput('ucp_link', 'UCP link', TextInputStyle.Short, log.ucpLink || log.ucp || '', 200),
+            buildInput('forum_link', 'Forum link', TextInputStyle.Short, log.forumLink || '', 300),
+            buildInput('interviewer', 'Issuer', TextInputStyle.Short, log.interviewer || log.moderator || '', 100)
         );
 }
 
@@ -119,6 +146,10 @@ module.exports = {
             .addStringOption(option => option
                 .setName('ucp_link')
                 .setDescription('UCP Link')
+                .setRequired(true))
+            .addStringOption(option => option
+                .setName('forum_link')
+                .setDescription('Forum member link')
                 .setRequired(true)))
 
         .addSubcommand(subcommand => subcommand
@@ -132,6 +163,14 @@ module.exports = {
         .addSubcommand(subcommand => subcommand
             .setName('search')
             .setDescription('View the logs for a SINGLE blacklisted user')
+            .addStringOption(option => option
+                .setName('ig_name')
+                .setDescription('In-game name')
+                .setAutocomplete(true)
+                .setRequired(true)))
+        .addSubcommand(subcommand => subcommand
+            .setName('edit')
+            .setDescription('Edit an existing blacklist record')
             .addStringOption(option => option
                 .setName('ig_name')
                 .setDescription('In-game name')
@@ -161,8 +200,9 @@ module.exports = {
             const reason = interaction.options.getString('reason');
             const length = interaction.options.getString('length');
             const ucpLink = interaction.options.getString('ucp_link');
+            const forumLink = interaction.options.getString('forum_link');
 
-            const result = await addBlacklistUser(igName, reason, length, ucpLink, interviewer);
+            const result = await addBlacklistUser(igName, reason, length, ucpLink, interviewer, forumLink);
 
             if (!result.added) {
                 return interaction.reply({
@@ -221,6 +261,20 @@ module.exports = {
                 flags: MessageFlags.IsComponentsV2,
                 ephemeral: true
             });
+        }
+        if (subcommand === 'edit') {
+            const igName = interaction.options.getString('ig_name');
+            const userLogs = getUserLogs(igName);
+            const latestLog = userLogs[userLogs.length - 1];
+
+            if (!latestLog) {
+                return interaction.reply({
+                    content: `❌ No active blacklist record found for **${igName}**.`,
+                    ephemeral: true
+                });
+            }
+
+            return interaction.showModal(buildEditModal(igName, latestLog));
         }
     },
 
@@ -310,10 +364,10 @@ module.exports = {
 
         if (interaction.customId === 'blacklist:add:submit') {
             const igName = interaction.fields.getTextInputValue('ig_name').trim();
-            const interviewer = interaction.fields.getTextInputValue('interviewer').trim();
             const reason = interaction.fields.getTextInputValue('reason').trim();
             const enteredLength = interaction.fields.getTextInputValue('length').trim();
             const ucpLink = interaction.fields.getTextInputValue('ucp_link').trim();
+            const forumLink = interaction.fields.getTextInputValue('forum_link').trim();
             const normalizedLength = enteredLength.toLowerCase();
             const length = normalizedLength === 'permanent'
                 ? 'Permanent'
@@ -326,7 +380,8 @@ module.exports = {
                 });
             }
 
-            const result = await addBlacklistUser(igName, reason, length, ucpLink, interviewer);
+            const interviewer = interaction.member?.displayName || interaction.user.username;
+            const result = await addBlacklistUser(igName, reason, length, ucpLink, interviewer, forumLink);
             if (!result.added) {
                 return interaction.reply({
                     content: `Could not add user to blacklist: ${result.reason}`,
@@ -337,6 +392,44 @@ module.exports = {
             await updateLiveBlacklistEmbed(interaction);
             return interaction.reply({
                 content: `User **${igName}** has been added to the blacklist.`,
+                ephemeral: true
+            });
+        }
+
+        if (interaction.customId.startsWith('blacklist:edit:submit:')) {
+            const logId = decodeURIComponent(interaction.customId.slice('blacklist:edit:submit:'.length));
+            const reason = interaction.fields.getTextInputValue('reason').trim();
+            const enteredLength = interaction.fields.getTextInputValue('length').trim();
+            const ucpLink = interaction.fields.getTextInputValue('ucp_link').trim();
+            const forumLink = interaction.fields.getTextInputValue('forum_link').trim();
+            const interviewer = interaction.fields.getTextInputValue('interviewer').trim();
+            const normalizedLength = enteredLength.toLowerCase();
+            const length = normalizedLength === 'permanent' ? 'Permanent' : normalizedLength;
+
+            if (!['1d', '3d', '1w', '2w', 'Permanent'].includes(length)) {
+                return interaction.reply({
+                    content: 'Duration must be `1d`, `3d`, `1w`, `2w`, or `Permanent`.',
+                    ephemeral: true
+                });
+            }
+
+            const result = updateBlacklistUser(logId, {
+                reason,
+                length,
+                ucpLink,
+                forumLink,
+                interviewer
+            });
+            if (!result.updated) {
+                return interaction.reply({
+                    content: `Could not update blacklist record: ${result.reason}`,
+                    ephemeral: true
+                });
+            }
+
+            await updateLiveBlacklistEmbed(interaction);
+            return interaction.reply({
+                content: `✅ Blacklist record for **${result.log.user}** has been updated.`,
                 ephemeral: true
             });
         }

@@ -13,27 +13,26 @@ const {
 const API_BASE_URL = process.env.IMRP_API_BASE_URL || 'https://api.sa-mp.im/v2/public';
 const resultCache = new Map();
 
-const SNIPER_EMOJI_ID = '1555998179739172965';
-const SNIPER_EMOJI = `<:sniper:${SNIPER_EMOJI_ID}>`;
+const SNIPER_EMOJI = `<:sniper:1556019524371873904>`;
 const FACTION_EMOJI_IDS = {
-    '1': '1555999396162838588', // Corleone
-    '2': '1555999398704718086', // Tattaglia
-    '3': '1555999401120501854', // Stracci
-    '4': null, // Cuneo
-    '5': '1555999402579992827', // Barzini
-    '6': null, // Paterno
-    '7': '1555999404610158702', // San Andreas Police Department
+    '1': '1557427552254042172', // Corleone
+    '2': '1557427553881423882', // Tattaglia
+    '3': '1557427555923927141', // Stracci
+    '4': '1557427575763116155', // Cuneo
+    '5': '1557427557689729034', // Barzini
+    '6': '1557427560252444752', // Paterno
+    '7': '1557427564287365220', // San Andreas Police Department
     '8': null, // Hitman
-    '10': null, // San Andreas Special Forces
-    '11': null, // Government
-    '12': null, // Nat. Office of Security Enf.
-    '13': null, // The Fake News Agency
+    '10': '1557427566049099796', // San Andreas Special Forces
+    '11': '1557427567714242640', // Government
+    '12': '1557427569219862628', // Nat. Office of Security Enf.
+    '13': '1557427570910171187', // The Fake News Agency
     '14': '1555999406141087754', // Kemirov
-    '15': null, // Leone
+    '15': '1557429714568614008', // Leone
     '16': '1555999407147589693', // DeLeon
     '19': null, // Windsor Inc.
     '25': '1555999393730011157', // Civilian
-    '26': null // Marsico
+    '26': null // Unoffy#1
 };
 
 
@@ -144,9 +143,9 @@ function addFactionSections(container, sections, factionIndexes) {
         container.addSeparatorComponents(new SeparatorBuilder().setDivider(true));
 
         let totalText = '';
-        if (section.name !== 'Other Factions') {
+        if (section.name !== 'Other Facations') {
             const { players, snipers } = getAllianceStats(section.factions);
-            totalText = ` - ${players} ${SNIPER_EMOJI}${snipers}`;
+            totalText = ` - ${players} ${SNIPER_EMOJI} ${snipers}`;
         }
 
         container.addTextDisplayComponents(
@@ -157,9 +156,10 @@ function addFactionSections(container, sections, factionIndexes) {
             const row = new ActionRowBuilder();
             for (const faction of section.factions.slice(index, index + 5)) {
                 const snipers = getFactionSniperCount(faction);
+                const sniperText = snipers > 0 ? ` (${snipers})` : '';
                 const button = new ButtonBuilder()
                     .setCustomId(`on:faction:${factionIndexes.get(faction)}`)
-                    .setLabel(`${faction.name}: ${faction.players.length} (${snipers})`.slice(0, 80))
+                    .setLabel(`${faction.name}: ${faction.players.length}${sniperText}`.slice(0, 80))
                     .setStyle(ButtonStyle.Secondary);
                 const emojiId = getFactionEmojiId(faction);
 
