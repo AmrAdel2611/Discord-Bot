@@ -1,6 +1,7 @@
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 require('dotenv').config();
 const fs = require('fs');
+const { scheduleDailyBlacklistSync } = require('./utils/blacklistApi');
 
 const client = new Client({
     intents: [
@@ -25,6 +26,7 @@ console.log("✅ Loaded Commands:", [...client.commands.keys()]);
 
 client.once('ready', async () => {
     console.log(`🟢 Logged in: ${client.user.tag}`);
+    scheduleDailyBlacklistSync(client);
 });
 
 process.on('SIGINT', async () => {

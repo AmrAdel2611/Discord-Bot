@@ -1,0 +1,2817 @@
+{
+  "data": {
+    "logs": [
+      {
+        "id": 13172643,
+        "type": "FACTION_BL",
+        "created_at": "2026-10-04T16:06:58Z",
+        "message": "Geert_Jan(123271358) was o-added to the faction blacklist by Mihael_Bourne(123227853).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Mihael_Bourne",
+          "player_id": 123227853,
+          "target_player_name": "Geert_Jan",
+          "target_player_id": 123271358
+        }
+      },
+      {
+        "id": 13170776,
+        "type": "FACTION_BL",
+        "created_at": "2026-10-03T08:58:46Z",
+        "message": "Masterio_Maldonado(123247922) was o-added to the faction blacklist by Luigi_Narcotti(123249494).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Luigi_Narcotti",
+          "player_id": 123249494,
+          "target_player_name": "Masterio_Maldonado",
+          "target_player_id": 123247922
+        }
+      },
+      {
+        "id": 13148732,
+        "type": "FACTION_BL",
+        "created_at": "2026-09-23T15:00:26Z",
+        "message": "Antonio_Capparelli(218234) was added to the faction blacklist by Francis_Whittaker(216458) (Reason: Faction hooping,alot! 4 factions for 1 month.).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Francis_Whittaker",
+          "player_id": 216458,
+          "target_player_name": "Antonio_Capparelli",
+          "target_player_id": 218234,
+          "reason": "Faction hooping,alot! 4 factions for 1 month."
+        }
+      },
+      {
+        "id": 13125329,
+        "type": "FACTION_BL",
+        "created_at": "2026-09-01T20:09:38Z",
+        "message": "Ezio_Pearce(123156754) was o-added to the faction blacklist by Mihael_Bourne(123227853).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Mihael_Bourne",
+          "player_id": 123227853,
+          "target_player_name": "Ezio_Pearce",
+          "target_player_id": 123156754
+        }
+      },
+      {
+        "id": 13125038,
+        "type": "FACTION_BL",
+        "created_at": "2026-09-01T15:30:06Z",
+        "message": "Refael_Strozzi(123256524) was o-added to the faction blacklist by Mihael_Bourne(123227853).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Mihael_Bourne",
+          "player_id": 123227853,
+          "target_player_name": "Refael_Strozzi",
+          "target_player_id": 123256524
+        }
+      },
+      {
+        "id": 13125037,
+        "type": "FACTION_BL",
+        "created_at": "2026-09-01T15:29:52Z",
+        "message": "Ammar_Elkhott(123245368) was o-added to the faction blacklist by Mihael_Bourne(123227853).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Mihael_Bourne",
+          "player_id": 123227853,
+          "target_player_name": "Ammar_Elkhott",
+          "target_player_id": 123245368
+        }
+      },
+      {
+        "id": 13120850,
+        "type": "FACTION_BL",
+        "created_at": "2026-08-27T16:14:44Z",
+        "message": "Keanu_Auciello(123127515) was o-added to the faction blacklist by Mihael_Bourne(123227853).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Mihael_Bourne",
+          "player_id": 123227853,
+          "target_player_name": "Keanu_Auciello",
+          "target_player_id": 123127515
+        }
+      },
+      {
+        "id": 13114387,
+        "type": "FACTION_BL",
+        "created_at": "2026-08-20T11:52:07Z",
+        "message": "Blade_Wilson(27290) was o-added to the faction blacklist by Mihael_Bourne(123227853).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Mihael_Bourne",
+          "player_id": 123227853,
+          "target_player_name": "Blade_Wilson",
+          "target_player_id": 27290
+        }
+      },
+      {
+        "id": 13114386,
+        "type": "FACTION_BL",
+        "created_at": "2026-08-20T11:50:58Z",
+        "message": "Victor_Sciacca(123247795) was o-added to the faction blacklist by Mihael_Bourne(123227853).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Mihael_Bourne",
+          "player_id": 123227853,
+          "target_player_name": "Victor_Sciacca",
+          "target_player_id": 123247795
+        }
+      },
+      {
+        "id": 13112182,
+        "type": "FACTION_BL",
+        "created_at": "2026-08-17T20:04:11Z",
+        "message": "Kevin_Salerno(218222) was removed from the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Kevin_Salerno",
+          "target_player_id": 218222
+        }
+      },
+      {
+        "id": 13111484,
+        "type": "FACTION_BL",
+        "created_at": "2026-08-16T20:36:48Z",
+        "message": "Jacob_Sharp(123270144) was added to the faction blacklist by Ray_Strozzi(123170149) (Reason: Corruption - T3).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Ray_Strozzi",
+          "player_id": 123170149,
+          "target_player_name": "Jacob_Sharp",
+          "target_player_id": 123270144,
+          "reason": "Corruption - T3"
+        }
+      },
+      {
+        "id": 13110926,
+        "type": "FACTION_BL",
+        "created_at": "2026-08-15T23:38:40Z",
+        "message": "Mickey_Cerovina(123234309) was removed from the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Mickey_Cerovina",
+          "target_player_id": 123234309
+        }
+      },
+      {
+        "id": 13110925,
+        "type": "FACTION_BL",
+        "created_at": "2026-08-15T23:38:40Z",
+        "message": "Mickey_Cerovina(123234309) was removed from the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Mickey_Cerovina",
+          "target_player_id": 123234309
+        }
+      },
+      {
+        "id": 13104453,
+        "type": "FACTION_BL",
+        "created_at": "2026-08-07T14:53:54Z",
+        "message": "Cross_Mercer(123247023) was o-added to the faction blacklist by Mihael_Bourne(123227853).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Mihael_Bourne",
+          "player_id": 123227853,
+          "target_player_name": "Cross_Mercer",
+          "target_player_id": 123247023
+        }
+      },
+      {
+        "id": 12971295,
+        "type": "FACTION_BL",
+        "created_at": "2026-06-19T23:50:56Z",
+        "message": "Kevin_Salerno(218222) was added to the faction blacklist by Ray_Strozzi(123170149) (Reason: Blackmailing + Abusing Shamal Script with alt NOT WELCOME ever again).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Ray_Strozzi",
+          "player_id": 123170149,
+          "target_player_name": "Kevin_Salerno",
+          "target_player_id": 218222,
+          "reason": "Blackmailing + Abusing Shamal Script with alt NOT WELCOME ever again"
+        }
+      },
+      {
+        "id": 12948166,
+        "type": "FACTION_BL",
+        "created_at": "2026-06-15T17:44:53Z",
+        "message": "Amber_Whittaker(123198403) was added to the faction blacklist by Carlos_Mendoza(28224) (Reason: Involved in corruption as T3 - not welcome back).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Amber_Whittaker",
+          "target_player_id": 123198403,
+          "reason": "Involved in corruption as T3 - not welcome back"
+        }
+      },
+      {
+        "id": 12948165,
+        "type": "FACTION_BL",
+        "created_at": "2026-06-15T17:44:09Z",
+        "message": "Teddy_Volkov(123257028) was o-added to the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Teddy_Volkov",
+          "target_player_id": 123257028
+        }
+      },
+      {
+        "id": 12899642,
+        "type": "FACTION_BL",
+        "created_at": "2026-06-08T23:57:40Z",
+        "message": "Dean_Catrin(123150096) was o-added to the faction blacklist by Giuseppe_Marchese(218061).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Giuseppe_Marchese",
+          "player_id": 218061,
+          "target_player_name": "Dean_Catrin",
+          "target_player_id": 123150096
+        }
+      },
+      {
+        "id": 12762162,
+        "type": "FACTION_BL",
+        "created_at": "2026-05-20T19:51:35Z",
+        "message": "Abadan_Ebni(123151703) was added to the faction blacklist by Ray_Strozzi(123170149) (Reason: Scamming pd members - trying his best to join pd again with alts - not welcome ).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Ray_Strozzi",
+          "player_id": 123170149,
+          "target_player_name": "Abadan_Ebni",
+          "target_player_id": 123151703,
+          "reason": "Scamming pd members - trying his best to join pd again with alts - not welcome "
+        }
+      },
+      {
+        "id": 12669099,
+        "type": "FACTION_BL",
+        "created_at": "2026-05-05T17:36:01Z",
+        "message": "Raphael_Verderaz(123256524) was removed from the faction blacklist by Ray_Strozzi(123170149).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Ray_Strozzi",
+          "player_id": 123170149,
+          "target_player_name": "Raphael_Verderaz",
+          "target_player_id": 123256524
+        }
+      },
+      {
+        "id": 12632865,
+        "type": "FACTION_BL",
+        "created_at": "2026-04-26T17:45:47Z",
+        "message": "Harue_Koizumi(123178648) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Harue_Koizumi",
+          "target_player_id": 123178648
+        }
+      },
+      {
+        "id": 12632850,
+        "type": "FACTION_BL",
+        "created_at": "2026-04-26T17:44:47Z",
+        "message": "Eliano_Quinn(123256776) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Eliano_Quinn",
+          "target_player_id": 123256776
+        }
+      },
+      {
+        "id": 12632849,
+        "type": "FACTION_BL",
+        "created_at": "2026-04-26T17:44:37Z",
+        "message": "Ishak_Reznov(123247976) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Ishak_Reznov",
+          "target_player_id": 123247976
+        }
+      },
+      {
+        "id": 12632840,
+        "type": "FACTION_BL",
+        "created_at": "2026-04-26T17:43:54Z",
+        "message": "Ryan_Bakovic(123188196) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Ryan_Bakovic",
+          "target_player_id": 123188196
+        }
+      },
+      {
+        "id": 12632837,
+        "type": "FACTION_BL",
+        "created_at": "2026-04-26T17:43:42Z",
+        "message": "Stu_Mel(123242440) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Stu_Mel",
+          "target_player_id": 123242440
+        }
+      },
+      {
+        "id": 12632836,
+        "type": "FACTION_BL",
+        "created_at": "2026-04-26T17:43:28Z",
+        "message": "Orka_Barrs(123194708) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Orka_Barrs",
+          "target_player_id": 123194708
+        }
+      },
+      {
+        "id": 12632835,
+        "type": "FACTION_BL",
+        "created_at": "2026-04-26T17:43:20Z",
+        "message": "Jacob_Martinez(123236433) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Jacob_Martinez",
+          "target_player_id": 123236433
+        }
+      },
+      {
+        "id": 12632834,
+        "type": "FACTION_BL",
+        "created_at": "2026-04-26T17:43:13Z",
+        "message": "Ten_Falcone(123225490) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Ten_Falcone",
+          "target_player_id": 123225490
+        }
+      },
+      {
+        "id": 12561126,
+        "type": "FACTION_BL",
+        "created_at": "2026-04-11T13:01:36Z",
+        "message": "Alonzo_Goretti(123171574) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Alonzo_Goretti",
+          "target_player_id": 123171574
+        }
+      },
+      {
+        "id": 12546570,
+        "type": "FACTION_BL",
+        "created_at": "2026-04-06T19:28:19Z",
+        "message": "Romeo_DiFronzo(123124145) was o-added to the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Romeo_DiFronzo",
+          "target_player_id": 123124145
+        }
+      },
+      {
+        "id": 12545799,
+        "type": "FACTION_BL",
+        "created_at": "2026-04-06T10:49:48Z",
+        "message": "Romeo_DiFronzo(123124145) was removed from the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Romeo_DiFronzo",
+          "target_player_id": 123124145
+        }
+      },
+      {
+        "id": 12540772,
+        "type": "FACTION_BL",
+        "created_at": "2026-04-04T21:13:30Z",
+        "message": "Lui_Marshall(175394) was added to the faction blacklist by Ray_Strozzi(123170149) (Reason: Corruption).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Ray_Strozzi",
+          "player_id": 123170149,
+          "target_player_name": "Lui_Marshall",
+          "target_player_id": 175394,
+          "reason": "Corruption"
+        }
+      },
+      {
+        "id": 12536128,
+        "type": "FACTION_BL",
+        "created_at": "2026-04-03T19:51:05Z",
+        "message": "Jonny_Falcone(123234265) was o-added to the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Jonny_Falcone",
+          "target_player_id": 123234265
+        }
+      },
+      {
+        "id": 12514266,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-28T12:23:30Z",
+        "message": "Stu_Sacco(123236672) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Stu_Sacco",
+          "target_player_id": 123236672
+        }
+      },
+      {
+        "id": 12498607,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-21T03:09:15Z",
+        "message": "Loux_Soze(123226159) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Loux_Soze",
+          "target_player_id": 123226159
+        }
+      },
+      {
+        "id": 12493565,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:32:47Z",
+        "message": "Cheb_Bilo(123244522) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Cheb_Bilo",
+          "target_player_id": 123244522
+        }
+      },
+      {
+        "id": 12493564,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:32:43Z",
+        "message": "Quincy_Soze(123243950) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Quincy_Soze",
+          "target_player_id": 123243950
+        }
+      },
+      {
+        "id": 12493563,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:32:17Z",
+        "message": "Agazio_Sacco(123241095) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Agazio_Sacco",
+          "target_player_id": 123241095
+        }
+      },
+      {
+        "id": 12493562,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:32:02Z",
+        "message": "Xenio_Tretzi(123242704) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Xenio_Tretzi",
+          "target_player_id": 123242704
+        }
+      },
+      {
+        "id": 12493561,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:31:54Z",
+        "message": "Arkan_Barrs(123251529) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Arkan_Barrs",
+          "target_player_id": 123251529
+        }
+      },
+      {
+        "id": 12493560,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:31:23Z",
+        "message": "Jade_Silorio(123253917) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Jade_Silorio",
+          "target_player_id": 123253917
+        }
+      },
+      {
+        "id": 12493559,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:31:15Z",
+        "message": "Carlo_Bucci(123230637) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Carlo_Bucci",
+          "target_player_id": 123230637
+        }
+      },
+      {
+        "id": 12493558,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:31:05Z",
+        "message": "Jimmy_Andolini(123250684) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Jimmy_Andolini",
+          "target_player_id": 123250684
+        }
+      },
+      {
+        "id": 12493557,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:30:57Z",
+        "message": "Akshay_Gupta(123255389) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Akshay_Gupta",
+          "target_player_id": 123255389
+        }
+      },
+      {
+        "id": 12493556,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:30:45Z",
+        "message": "Kai_Lubu(123249780) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Kai_Lubu",
+          "target_player_id": 123249780
+        }
+      },
+      {
+        "id": 12493555,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:30:23Z",
+        "message": "Lucifer_Moghaddam(123249376) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Lucifer_Moghaddam",
+          "target_player_id": 123249376
+        }
+      },
+      {
+        "id": 12493554,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:30:17Z",
+        "message": "John_Brunson(123250255) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "John_Brunson",
+          "target_player_id": 123250255
+        }
+      },
+      {
+        "id": 12493553,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:29:35Z",
+        "message": "Frank_Decali(123237196) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Frank_Decali",
+          "target_player_id": 123237196
+        }
+      },
+      {
+        "id": 12493526,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:27:17Z",
+        "message": "Federico_Ingrassia(123225648) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Federico_Ingrassia",
+          "target_player_id": 123225648
+        }
+      },
+      {
+        "id": 12493525,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:26:50Z",
+        "message": "Bernadette_Vadboncoeur(123202371) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Bernadette_Vadboncoeur",
+          "target_player_id": 123202371
+        }
+      },
+      {
+        "id": 12493524,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:26:19Z",
+        "message": "Sayo_Kamuto(123230728) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Sayo_Kamuto",
+          "target_player_id": 123230728
+        }
+      },
+      {
+        "id": 12493523,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:26:12Z",
+        "message": "Zoey_Berkimovic(123256348) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Zoey_Berkimovic",
+          "target_player_id": 123256348
+        }
+      },
+      {
+        "id": 12493522,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:26:01Z",
+        "message": "Dolph_DeTtore(123193210) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Dolph_DeTtore",
+          "target_player_id": 123193210
+        }
+      },
+      {
+        "id": 12493521,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:25:35Z",
+        "message": "Italo_Gomorrah(123225399) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Italo_Gomorrah",
+          "target_player_id": 123225399
+        }
+      },
+      {
+        "id": 12493520,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-18T16:25:28Z",
+        "message": "Lei_Silenzio(123174333) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Lei_Silenzio",
+          "target_player_id": 123174333
+        }
+      },
+      {
+        "id": 12491019,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-17T10:35:08Z",
+        "message": "Joe_Falcone(123221613) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Joe_Falcone",
+          "target_player_id": 123221613
+        }
+      },
+      {
+        "id": 12489010,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-16T12:20:52Z",
+        "message": "Mickey_Cerovina(123234309) was o-added to the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Mickey_Cerovina",
+          "target_player_id": 123234309
+        }
+      },
+      {
+        "id": 12487404,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-15T17:42:09Z",
+        "message": "Andre_Alciato(123195361) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Andre_Alciato",
+          "target_player_id": 123195361
+        }
+      },
+      {
+        "id": 12476581,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-11T22:39:36Z",
+        "message": "Vitaly_Kavlenko(217474) was removed from the faction blacklist by Castoro_Mangano(123144643).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Castoro_Mangano",
+          "player_id": 123144643,
+          "target_player_name": "Vitaly_Kavlenko",
+          "target_player_id": 217474
+        }
+      },
+      {
+        "id": 12461753,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-07T10:25:06Z",
+        "message": "Aigou_Snow(123157231) was removed from the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Aigou_Snow",
+          "target_player_id": 123157231
+        }
+      },
+      {
+        "id": 12461752,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-07T10:24:59Z",
+        "message": "Aigou_Snow(123157231) was o-added to the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Aigou_Snow",
+          "target_player_id": 123157231
+        }
+      },
+      {
+        "id": 12461751,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-07T10:24:10Z",
+        "message": "Aigou_Snow(123157231) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Aigou_Snow",
+          "target_player_id": 123157231
+        }
+      },
+      {
+        "id": 12456387,
+        "type": "FACTION_BL",
+        "created_at": "2026-03-05T23:25:09Z",
+        "message": "Refael_Mozorov(123256524) was added to the faction blacklist by Giuseppe_Marchese(218061) (Reason: Extremely toxic, bipolar, ungrateful, disloyal. Not welcome in PD.).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Giuseppe_Marchese",
+          "player_id": 218061,
+          "target_player_name": "Refael_Mozorov",
+          "target_player_id": 123256524,
+          "reason": "Extremely toxic, bipolar, ungrateful, disloyal. Not welcome in PD."
+        }
+      },
+      {
+        "id": 12419181,
+        "type": "FACTION_BL",
+        "created_at": "2026-02-22T12:37:47Z",
+        "message": "Lion_Verderaz(123183885) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Lion_Verderaz",
+          "target_player_id": 123183885
+        }
+      },
+      {
+        "id": 12406673,
+        "type": "FACTION_BL",
+        "created_at": "2026-02-18T12:16:32Z",
+        "message": "Frost_Maldonado(123266694) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Frost_Maldonado",
+          "target_player_id": 123266694
+        }
+      },
+      {
+        "id": 12406639,
+        "type": "FACTION_BL",
+        "created_at": "2026-02-18T12:09:37Z",
+        "message": "Frost_Maldonado(123266694) was added to the faction blacklist by Parker_Wells(123246869) (Reason: Unable to perform duties).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Frost_Maldonado",
+          "target_player_id": 123266694,
+          "reason": "Unable to perform duties"
+        }
+      },
+      {
+        "id": 12392630,
+        "type": "FACTION_BL",
+        "created_at": "2026-02-14T13:30:28Z",
+        "message": "Aigou_Snow(123157231) was o-added to the faction blacklist by Castoro_Mangano(123144643).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Castoro_Mangano",
+          "player_id": 123144643,
+          "target_player_name": "Aigou_Snow",
+          "target_player_id": 123157231
+        }
+      },
+      {
+        "id": 12392627,
+        "type": "FACTION_BL",
+        "created_at": "2026-02-14T13:30:16Z",
+        "message": "Eren_Reagan(123171574) was o-added to the faction blacklist by Castoro_Mangano(123144643).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Castoro_Mangano",
+          "player_id": 123144643,
+          "target_player_name": "Eren_Reagan",
+          "target_player_id": 123171574
+        }
+      },
+      {
+        "id": 12330740,
+        "type": "FACTION_BL",
+        "created_at": "2026-01-30T15:56:22Z",
+        "message": "Alexander_Dezzi(123237562) was removed from the faction blacklist by Castoro_Mangano(123144643).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Castoro_Mangano",
+          "player_id": 123144643,
+          "target_player_name": "Alexander_Dezzi",
+          "target_player_id": 123237562
+        }
+      },
+      {
+        "id": 12329321,
+        "type": "FACTION_BL",
+        "created_at": "2026-01-30T01:07:23Z",
+        "message": "Leroy_Saccone(123189431) was removed from the faction blacklist by Giuseppe_Marchese(218061).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Giuseppe_Marchese",
+          "player_id": 218061,
+          "target_player_name": "Leroy_Saccone",
+          "target_player_id": 123189431
+        }
+      },
+      {
+        "id": 12299804,
+        "type": "FACTION_BL",
+        "created_at": "2026-01-17T00:34:39Z",
+        "message": "Frank_DeCali(123237196) was added to the faction blacklist by Castoro_Mangano(123144643) (Reason: retarded, talking shit about pd from main / alt).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Castoro_Mangano",
+          "player_id": 123144643,
+          "target_player_name": "Frank_DeCali",
+          "target_player_id": 123237196,
+          "reason": "retarded, talking shit about pd from main / alt"
+        }
+      },
+      {
+        "id": 12292913,
+        "type": "FACTION_BL",
+        "created_at": "2026-01-13T16:18:53Z",
+        "message": "Hester_Schlegelstein(123234815) was removed from the faction blacklist by Giuseppe_Marchese(218061).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Giuseppe_Marchese",
+          "player_id": 218061,
+          "target_player_name": "Hester_Schlegelstein",
+          "target_player_id": 123234815
+        }
+      },
+      {
+        "id": 12284814,
+        "type": "FACTION_BL",
+        "created_at": "2026-01-10T01:08:01Z",
+        "message": "Quincy_Soze(123243950) was o-added to the faction blacklist by Giuseppe_Marchese(218061).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Giuseppe_Marchese",
+          "player_id": 218061,
+          "target_player_name": "Quincy_Soze",
+          "target_player_id": 123243950
+        }
+      },
+      {
+        "id": 12284403,
+        "type": "FACTION_BL",
+        "created_at": "2026-01-09T21:09:13Z",
+        "message": "Cheb_Bilo(123244522) was added to the faction blacklist by Giuseppe_Marchese(218061) (Reason: corruption).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Giuseppe_Marchese",
+          "player_id": 218061,
+          "target_player_name": "Cheb_Bilo",
+          "target_player_id": 123244522,
+          "reason": "corruption"
+        }
+      },
+      {
+        "id": 12277883,
+        "type": "FACTION_BL",
+        "created_at": "2026-01-06T14:06:36Z",
+        "message": "Felipe_Inzaghi(123258982) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Felipe_Inzaghi",
+          "target_player_id": 123258982
+        }
+      },
+      {
+        "id": 12269448,
+        "type": "FACTION_BL",
+        "created_at": "2026-01-01T16:39:27Z",
+        "message": "Lester_Castello(185731) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Lester_Castello",
+          "target_player_id": 185731
+        }
+      },
+      {
+        "id": 12269447,
+        "type": "FACTION_BL",
+        "created_at": "2026-01-01T16:38:55Z",
+        "message": "Enzo_King(123170183) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Enzo_King",
+          "target_player_id": 123170183
+        }
+      },
+      {
+        "id": 12268206,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-30T22:53:59Z",
+        "message": "Enzo_Colombo(123226159) was o-added to the faction blacklist by Giuseppe_Marchese(218061).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Giuseppe_Marchese",
+          "player_id": 218061,
+          "target_player_name": "Enzo_Colombo",
+          "target_player_id": 123226159
+        }
+      },
+      {
+        "id": 12267206,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-29T07:33:38Z",
+        "message": "Jamie_Silenzio(123257005) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Jamie_Silenzio",
+          "target_player_id": 123257005
+        }
+      },
+      {
+        "id": 12267205,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-29T07:30:39Z",
+        "message": "Miles_Addison(123220769) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Miles_Addison",
+          "target_player_id": 123220769
+        }
+      },
+      {
+        "id": 12267204,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-29T07:28:42Z",
+        "message": "Marcus_Cavallaro(36865) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Marcus_Cavallaro",
+          "target_player_id": 36865
+        }
+      },
+      {
+        "id": 12267203,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-29T07:28:11Z",
+        "message": "Andrei_Montana(123257140) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Andrei_Montana",
+          "target_player_id": 123257140
+        }
+      },
+      {
+        "id": 12267202,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-29T07:28:06Z",
+        "message": "Drew_Montana(123256858) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Drew_Montana",
+          "target_player_id": 123256858
+        }
+      },
+      {
+        "id": 12267201,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-29T07:27:57Z",
+        "message": "Dexter_Corpin(123259133) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Dexter_Corpin",
+          "target_player_id": 123259133
+        }
+      },
+      {
+        "id": 12267200,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-29T07:27:20Z",
+        "message": "Bartholomew_London(123248271) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Bartholomew_London",
+          "target_player_id": 123248271
+        }
+      },
+      {
+        "id": 12267199,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-29T07:27:10Z",
+        "message": "Jhon_Badman(123145158) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Jhon_Badman",
+          "target_player_id": 123145158
+        }
+      },
+      {
+        "id": 12267198,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-29T07:26:59Z",
+        "message": "Viggo_Alvarez(123245411) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Viggo_Alvarez",
+          "target_player_id": 123245411
+        }
+      },
+      {
+        "id": 12267197,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-29T07:24:49Z",
+        "message": "Joseph_VacCaro(123145679) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Joseph_VacCaro",
+          "target_player_id": 123145679
+        }
+      },
+      {
+        "id": 12267196,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-29T07:24:32Z",
+        "message": "Stevie_Prescott(123186343) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Stevie_Prescott",
+          "target_player_id": 123186343
+        }
+      },
+      {
+        "id": 12267195,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-29T07:24:19Z",
+        "message": "Ramiz_Lennox(123155859) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Ramiz_Lennox",
+          "target_player_id": 123155859
+        }
+      },
+      {
+        "id": 12267059,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-29T00:50:04Z",
+        "message": "Grimaldo_Balbino(185731) was removed from the faction blacklist by Castoro_Mangano(123144643).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Castoro_Mangano",
+          "player_id": 123144643,
+          "target_player_name": "Grimaldo_Balbino",
+          "target_player_id": 185731
+        }
+      },
+      {
+        "id": 12267058,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-29T00:49:44Z",
+        "message": "Grimaldo_Balbino(185731) was o-added to the faction blacklist by Castoro_Mangano(123144643).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Castoro_Mangano",
+          "player_id": 123144643,
+          "target_player_name": "Grimaldo_Balbino",
+          "target_player_id": 185731
+        }
+      },
+      {
+        "id": 12265689,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-26T21:04:57Z",
+        "message": "Lou_Ping(123145675) was added to the faction blacklist by Castoro_Mangano(123144643) (Reason: Troll / disrespect high command and fucking up).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Castoro_Mangano",
+          "player_id": 123144643,
+          "target_player_name": "Lou_Ping",
+          "target_player_id": 123145675,
+          "reason": "Troll / disrespect high command and fucking up"
+        }
+      },
+      {
+        "id": 12263669,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-23T22:48:27Z",
+        "message": "Bartholomew_London(123248271) was o-added to the faction blacklist by Castoro_Mangano(123144643).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Castoro_Mangano",
+          "player_id": 123144643,
+          "target_player_name": "Bartholomew_London",
+          "target_player_id": 123248271
+        }
+      },
+      {
+        "id": 12261211,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-20T19:29:51Z",
+        "message": "Anthony_Whittaker(123143483) was removed from the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Anthony_Whittaker",
+          "target_player_id": 123143483
+        }
+      },
+      {
+        "id": 12259878,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-19T13:00:48Z",
+        "message": "Nikolai_Krivokrasov(123263969) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Nikolai_Krivokrasov",
+          "target_player_id": 123263969
+        }
+      },
+      {
+        "id": 12259876,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-19T13:00:23Z",
+        "message": "Jasure_Savage(123248972) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Jasure_Savage",
+          "target_player_id": 123248972
+        }
+      },
+      {
+        "id": 12259862,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-19T12:59:36Z",
+        "message": "Ercole_Turci(123159756) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Ercole_Turci",
+          "target_player_id": 123159756
+        }
+      },
+      {
+        "id": 12259857,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-19T12:59:03Z",
+        "message": "Ines_Victoriano(123262133) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Ines_Victoriano",
+          "target_player_id": 123262133
+        }
+      },
+      {
+        "id": 12259856,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-19T12:58:35Z",
+        "message": "Enzo_Franzese(123251569) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Enzo_Franzese",
+          "target_player_id": 123251569
+        }
+      },
+      {
+        "id": 12259854,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-19T12:57:29Z",
+        "message": "Rafael_Bucci(123238008) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Rafael_Bucci",
+          "target_player_id": 123238008
+        }
+      },
+      {
+        "id": 12259853,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-19T12:57:17Z",
+        "message": "Eren_Reagan(123171574) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Eren_Reagan",
+          "target_player_id": 123171574
+        }
+      },
+      {
+        "id": 12259852,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-19T12:57:09Z",
+        "message": "Karimos_Asbos(123223072) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Karimos_Asbos",
+          "target_player_id": 123223072
+        }
+      },
+      {
+        "id": 12259826,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-19T12:56:21Z",
+        "message": "Dylan_Bear(123230034) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Dylan_Bear",
+          "target_player_id": 123230034
+        }
+      },
+      {
+        "id": 12259825,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-19T12:56:07Z",
+        "message": "Brian_Galante(123235351) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Brian_Galante",
+          "target_player_id": 123235351
+        }
+      },
+      {
+        "id": 12248954,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-14T16:06:14Z",
+        "message": "Nikolai_Krivokrasov(123263969) was o-added to the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Nikolai_Krivokrasov",
+          "target_player_id": 123263969
+        }
+      },
+      {
+        "id": 12234515,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-08T14:57:03Z",
+        "message": "James_Trevisani(123207630) was o-added to the faction blacklist by Paulo_Ferreira(124376).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Paulo_Ferreira",
+          "player_id": 124376,
+          "target_player_name": "James_Trevisani",
+          "target_player_id": 123207630
+        }
+      },
+      {
+        "id": 12233132,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-07T19:38:53Z",
+        "message": "Jhon_Badman(123145158) was added to the faction blacklist by Paulo_Ferreira(124376) (Reason: Insulting ACoP, missing braincells).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Paulo_Ferreira",
+          "player_id": 124376,
+          "target_player_name": "Jhon_Badman",
+          "target_player_id": 123145158,
+          "reason": "Insulting ACoP, missing braincells"
+        }
+      },
+      {
+        "id": 12224796,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-03T16:58:10Z",
+        "message": "Enzo_King(123170183) was added to the faction blacklist by Paulo_Ferreira(124376) (Reason: Gennaro Yehonatan (Already blacklisted)).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Paulo_Ferreira",
+          "player_id": 124376,
+          "target_player_name": "Enzo_King",
+          "target_player_id": 123170183,
+          "reason": "Gennaro Yehonatan (Already blacklisted)"
+        }
+      },
+      {
+        "id": 12224249,
+        "type": "FACTION_BL",
+        "created_at": "2025-12-03T11:02:15Z",
+        "message": "Antonio_Capparelli(218234) was removed from the faction blacklist by Paulo_Ferreira(124376).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Paulo_Ferreira",
+          "player_id": 124376,
+          "target_player_name": "Antonio_Capparelli",
+          "target_player_id": 218234
+        }
+      },
+      {
+        "id": 12213852,
+        "type": "FACTION_BL",
+        "created_at": "2025-11-29T06:17:41Z",
+        "message": "Chanxi_Li(123259526) was removed from the faction blacklist by Paulo_Ferreira(124376).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Paulo_Ferreira",
+          "player_id": 124376,
+          "target_player_name": "Chanxi_Li",
+          "target_player_id": 123259526
+        }
+      },
+      {
+        "id": 12208445,
+        "type": "FACTION_BL",
+        "created_at": "2025-11-27T17:05:08Z",
+        "message": "Katerino_Petrova(123248271) was removed from the faction blacklist by Valentino_Cacchione(111169).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Valentino_Cacchione",
+          "player_id": 111169,
+          "target_player_name": "Katerino_Petrova",
+          "target_player_id": 123248271
+        }
+      },
+      {
+        "id": 12181504,
+        "type": "FACTION_BL",
+        "created_at": "2025-11-20T00:12:49Z",
+        "message": "Anthony_Whittaker(123143483) was o-added to the faction blacklist by Valentino_Cacchione(111169).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Valentino_Cacchione",
+          "player_id": 111169,
+          "target_player_name": "Anthony_Whittaker",
+          "target_player_id": 123143483
+        }
+      },
+      {
+        "id": 12176741,
+        "type": "FACTION_BL",
+        "created_at": "2025-11-18T11:31:35Z",
+        "message": "Andrei_Curran(123259133) was added to the faction blacklist by Paulo_Ferreira(124376) (Reason: (( Kean Tapenio - Parker ))).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Paulo_Ferreira",
+          "player_id": 124376,
+          "target_player_name": "Andrei_Curran",
+          "target_player_id": 123259133,
+          "reason": "(( Kean Tapenio - Parker ))"
+        }
+      },
+      {
+        "id": 12176266,
+        "type": "FACTION_BL",
+        "created_at": "2025-11-18T10:15:19Z",
+        "message": "Kean_Tapenio(123256716) was added to the faction blacklist by Paulo_Ferreira(124376) (Reason: ((Assisting main fac while on alt))).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Paulo_Ferreira",
+          "player_id": 124376,
+          "target_player_name": "Kean_Tapenio",
+          "target_player_id": 123256716,
+          "reason": "((Assisting main fac while on alt))"
+        }
+      },
+      {
+        "id": 12147343,
+        "type": "FACTION_BL",
+        "created_at": "2025-11-11T20:27:29Z",
+        "message": "Harue_Koizumi(123178648) was o-added to the faction blacklist by Paulo_Ferreira(124376).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Paulo_Ferreira",
+          "player_id": 124376,
+          "target_player_name": "Harue_Koizumi",
+          "target_player_id": 123178648
+        }
+      },
+      {
+        "id": 12134664,
+        "type": "FACTION_BL",
+        "created_at": "2025-11-08T21:31:26Z",
+        "message": "Lance_Soze(123255755) was removed from the faction blacklist by Paulo_Ferreira(124376).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Paulo_Ferreira",
+          "player_id": 124376,
+          "target_player_name": "Lance_Soze",
+          "target_player_id": 123255755
+        }
+      },
+      {
+        "id": 12128996,
+        "type": "FACTION_BL",
+        "created_at": "2025-11-07T14:46:31Z",
+        "message": "Bob_Hernandez(123249780) was added to the faction blacklist by Edward_Floyd(111169) (Reason: Idiot.).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Bob_Hernandez",
+          "target_player_id": 123249780,
+          "reason": "Idiot."
+        }
+      },
+      {
+        "id": 12125587,
+        "type": "FACTION_BL",
+        "created_at": "2025-11-05T19:14:56Z",
+        "message": "Jasure_Savage(123248972) was added to the faction blacklist by Paulo_Ferreira(124376) (Reason: Contact Paulo).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Paulo_Ferreira",
+          "player_id": 124376,
+          "target_player_name": "Jasure_Savage",
+          "target_player_id": 123248972,
+          "reason": "Contact Paulo"
+        }
+      },
+      {
+        "id": 12119585,
+        "type": "FACTION_BL",
+        "created_at": "2025-11-02T23:59:31Z",
+        "message": "Ramiz_Strozzi(123155859) was o-added to the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Ramiz_Strozzi",
+          "target_player_id": 123155859
+        }
+      },
+      {
+        "id": 12094383,
+        "type": "FACTION_BL",
+        "created_at": "2025-10-26T23:18:17Z",
+        "message": "Rachel_Porter(123146353) was removed from the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Rachel_Porter",
+          "target_player_id": 123146353
+        }
+      },
+      {
+        "id": 12094328,
+        "type": "FACTION_BL",
+        "created_at": "2025-10-26T23:14:45Z",
+        "message": "Flavio_Perez(123225648) was o-added to the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Flavio_Perez",
+          "target_player_id": 123225648
+        }
+      },
+      {
+        "id": 12093942,
+        "type": "FACTION_BL",
+        "created_at": "2025-10-26T22:02:03Z",
+        "message": "Raffa_Soze(123203362) was removed from the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Raffa_Soze",
+          "target_player_id": 123203362
+        }
+      },
+      {
+        "id": 12077885,
+        "type": "FACTION_BL",
+        "created_at": "2025-10-21T14:03:17Z",
+        "message": "Carlito_Massalsky(123183280) was removed from the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Carlito_Massalsky",
+          "target_player_id": 123183280
+        }
+      },
+      {
+        "id": 12073839,
+        "type": "FACTION_BL",
+        "created_at": "2025-10-19T20:32:13Z",
+        "message": "Joseph_VacCaro(123145679) was o-added to the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Joseph_VacCaro",
+          "target_player_id": 123145679
+        }
+      },
+      {
+        "id": 12073838,
+        "type": "FACTION_BL",
+        "created_at": "2025-10-19T20:32:01Z",
+        "message": "James_VacCaro(123182602) was removed from the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "James_VacCaro",
+          "target_player_id": 123182602
+        }
+      },
+      {
+        "id": 12073837,
+        "type": "FACTION_BL",
+        "created_at": "2025-10-19T20:31:35Z",
+        "message": "James_VacCaro(123182602) was added to the faction blacklist by Edward_Floyd(111169) (Reason: Not welcome anytime soon.).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "James_VacCaro",
+          "target_player_id": 123182602,
+          "reason": "Not welcome anytime soon."
+        }
+      },
+      {
+        "id": 12061986,
+        "type": "FACTION_BL",
+        "created_at": "2025-10-16T18:16:46Z",
+        "message": "Stevie_Prescott(123186343) was added to the faction blacklist by Edward_Floyd(111169) (Reason: Idiot, unprofessional, disrespectful.).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Stevie_Prescott",
+          "target_player_id": 123186343,
+          "reason": "Idiot, unprofessional, disrespectful."
+        }
+      },
+      {
+        "id": 12011074,
+        "type": "FACTION_BL",
+        "created_at": "2025-10-07T18:21:06Z",
+        "message": "Connell_Connelly(217474) was added to the faction blacklist by Connell_Duncan(123184221) (Reason: no place to fuck around).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Connell_Connelly",
+          "target_player_id": 217474,
+          "reason": "no place to fuck around"
+        }
+      },
+      {
+        "id": 12002246,
+        "type": "FACTION_BL",
+        "created_at": "2025-10-05T19:36:00Z",
+        "message": "Vito_Bucci(123183885) was o-added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Vito_Bucci",
+          "target_player_id": 123183885
+        }
+      },
+      {
+        "id": 11994263,
+        "type": "FACTION_BL",
+        "created_at": "2025-10-03T18:48:30Z",
+        "message": "Ercole_Turci(123159756) was added to the faction blacklist by Connell_Duncan(123184221) (Reason: Dumbass).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Ercole_Turci",
+          "target_player_id": 123159756,
+          "reason": "Dumbass"
+        }
+      },
+      {
+        "id": 11978583,
+        "type": "FACTION_BL",
+        "created_at": "2025-09-30T15:48:21Z",
+        "message": "Jamie_Munch(123257005) was added to the faction blacklist by Edward_Floyd(111169) (Reason: Kenji Ferro).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Jamie_Munch",
+          "target_player_id": 123257005,
+          "reason": "Kenji Ferro"
+        }
+      },
+      {
+        "id": 11977668,
+        "type": "FACTION_BL",
+        "created_at": "2025-09-30T09:14:25Z",
+        "message": "Asif_Hendrick(123261981) was added to the faction blacklist by Francis_Whittaker(216458) (Reason: corruption).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Francis_Whittaker",
+          "player_id": 216458,
+          "target_player_name": "Asif_Hendrick",
+          "target_player_id": 123261981,
+          "reason": "corruption"
+        }
+      },
+      {
+        "id": 11973525,
+        "type": "FACTION_BL",
+        "created_at": "2025-09-28T14:09:18Z",
+        "message": "Marcus_Cavallaro(36865) was o-added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Marcus_Cavallaro",
+          "target_player_id": 36865
+        }
+      },
+      {
+        "id": 11973017,
+        "type": "FACTION_BL",
+        "created_at": "2025-09-28T09:58:41Z",
+        "message": "Arabi_Hendrick(123258982) was o-added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Arabi_Hendrick",
+          "target_player_id": 123258982
+        }
+      },
+      {
+        "id": 11952098,
+        "type": "FACTION_BL",
+        "created_at": "2025-09-22T18:48:57Z",
+        "message": "Rachel_Porter(123146353) was o-added to the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Rachel_Porter",
+          "target_player_id": 123146353
+        }
+      },
+      {
+        "id": 11941989,
+        "type": "FACTION_BL",
+        "created_at": "2025-09-19T18:51:48Z",
+        "message": "Aziz_Alex(123262349) was removed from the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Aziz_Alex",
+          "target_player_id": 123262349
+        }
+      },
+      {
+        "id": 11941925,
+        "type": "FACTION_BL",
+        "created_at": "2025-09-19T18:41:52Z",
+        "message": "Aziz_Alex(123262349) was added to the faction blacklist by Connell_Duncan(123184221) (Reason: Retarded).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Aziz_Alex",
+          "target_player_id": 123262349,
+          "reason": "Retarded"
+        }
+      },
+      {
+        "id": 11934804,
+        "type": "FACTION_BL",
+        "created_at": "2025-09-17T14:04:01Z",
+        "message": "Andrei_Montana(123257140) was added to the faction blacklist by Connell_Duncan(123184221) (Reason: You know why.).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Andrei_Montana",
+          "target_player_id": 123257140,
+          "reason": "You know why."
+        }
+      },
+      {
+        "id": 11934802,
+        "type": "FACTION_BL",
+        "created_at": "2025-09-17T14:03:39Z",
+        "message": "Kenjo_Ferre(123256858) was added to the faction blacklist by Connell_Duncan(123184221) (Reason: You know why.).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Kenjo_Ferre",
+          "target_player_id": 123256858,
+          "reason": "You know why."
+        }
+      },
+      {
+        "id": 11931457,
+        "type": "FACTION_BL",
+        "created_at": "2025-09-16T13:06:55Z",
+        "message": "Eliano_Quinn(123256776) was added to the faction blacklist by Edward_Floyd(111169) (Reason: TROLL).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Eliano_Quinn",
+          "target_player_id": 123256776,
+          "reason": "TROLL"
+        }
+      },
+      {
+        "id": 11931412,
+        "type": "FACTION_BL",
+        "created_at": "2025-09-16T12:14:43Z",
+        "message": "Kenjo_Ferre(123256858) was removed from the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Kenjo_Ferre",
+          "target_player_id": 123256858
+        }
+      },
+      {
+        "id": 11926008,
+        "type": "FACTION_BL",
+        "created_at": "2025-09-14T21:59:12Z",
+        "message": "Baran_Koper(123262133) was added to the faction blacklist by Connell_Duncan(123184221) (Reason: Do not invite unless negotiated with Connell).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Baran_Koper",
+          "target_player_id": 123262133,
+          "reason": "Do not invite unless negotiated with Connell"
+        }
+      },
+      {
+        "id": 11922655,
+        "type": "FACTION_BL",
+        "created_at": "2025-09-13T19:48:25Z",
+        "message": "Rafael_Refaeli(123256524) was removed from the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Rafael_Refaeli",
+          "target_player_id": 123256524
+        }
+      },
+      {
+        "id": 11917030,
+        "type": "FACTION_BL",
+        "created_at": "2025-09-11T18:46:59Z",
+        "message": "Ray_Strozzi(123170149) was removed from the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Ray_Strozzi",
+          "target_player_id": 123170149
+        }
+      },
+      {
+        "id": 11897750,
+        "type": "FACTION_BL",
+        "created_at": "2025-09-07T21:47:43Z",
+        "message": "Ray_Strozzi(123170149) was added to the faction blacklist by Edward_Floyd(111169) (Reason: Corrupted.).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Ray_Strozzi",
+          "target_player_id": 123170149,
+          "reason": "Corrupted."
+        }
+      },
+      {
+        "id": 11856170,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-29T12:12:11Z",
+        "message": "Ishak_Reznov(123247976) was added to the faction blacklist by Edward_Floyd(111169) (Reason: Not stable.).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Ishak_Reznov",
+          "target_player_id": 123247976,
+          "reason": "Not stable."
+        }
+      },
+      {
+        "id": 11851288,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-27T20:50:21Z",
+        "message": "Grimaldo_Balbino(185731) was o-added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Grimaldo_Balbino",
+          "target_player_id": 185731
+        }
+      },
+      {
+        "id": 11843575,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-24T12:41:49Z",
+        "message": "Lucifer_Moghaddam(123249376) was added to the faction blacklist by Connell_Duncan(123184221) (Reason: ((Joseph_Wixx, troller))).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Lucifer_Moghaddam",
+          "target_player_id": 123249376,
+          "reason": "((Joseph_Wixx, troller))"
+        }
+      },
+      {
+        "id": 11843572,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-24T12:32:27Z",
+        "message": "John_Brunson(123250255) was added to the faction blacklist by Connell_Duncan(123184221) (Reason: (( Alphonse_Moghaddam))).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "John_Brunson",
+          "target_player_id": 123250255,
+          "reason": "(( Alphonse_Moghaddam))"
+        }
+      },
+      {
+        "id": 11841742,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-23T21:10:24Z",
+        "message": "Paulo_Ferreira(124376) was removed from the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Paulo_Ferreira",
+          "target_player_id": 124376
+        }
+      },
+      {
+        "id": 11841741,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-23T21:10:09Z",
+        "message": "Paulo_Ferreira(124376) was added to the faction blacklist by Carlos_Mendoza(28224) (Reason: Test test).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Paulo_Ferreira",
+          "target_player_id": 124376,
+          "reason": "Test test"
+        }
+      },
+      {
+        "id": 11841627,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-23T19:04:34Z",
+        "message": "Antonio_Capparelli(218234) was added to the faction blacklist by Edward_Floyd(111169) (Reason: Extremely toxic, immature, consistently poor judgment, power-obsessed; permanently unwelcome.\r\n).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Antonio_Capparelli",
+          "target_player_id": 218234,
+          "reason": "Extremely toxic, immature, consistently poor judgment, power-obsessed; permanently unwelcome.\r\n"
+        }
+      },
+      {
+        "id": 11837966,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-22T17:31:35Z",
+        "message": "Hester_Schlegelstein(123234815) was added to the faction blacklist by Connell_Duncan(123184221) (Reason: ((Wlist Leaker, Helfort))).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Hester_Schlegelstein",
+          "target_player_id": 123234815,
+          "reason": "((Wlist Leaker, Helfort))"
+        }
+      },
+      {
+        "id": 11823499,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-18T17:09:14Z",
+        "message": "Viggo_Vossa(123245411) was added to the faction blacklist by Connell_Duncan(123184221) (Reason: ((Katerino_Petrova))).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Viggo_Vossa",
+          "target_player_id": 123245411,
+          "reason": "((Katerino_Petrova))"
+        }
+      },
+      {
+        "id": 11822344,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-18T09:56:37Z",
+        "message": "Kenjo_Lennox(123256858) was added to the faction blacklist by Connell_Duncan(123184221) (Reason: ((Drew Montana))).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Kenjo_Lennox",
+          "target_player_id": 123256858,
+          "reason": "((Drew Montana))"
+        }
+      },
+      {
+        "id": 11821789,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-18T07:24:15Z",
+        "message": "Agazio_Sacco(123241095) was o-added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Agazio_Sacco",
+          "target_player_id": 123241095
+        }
+      },
+      {
+        "id": 11819970,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-17T14:08:46Z",
+        "message": "Andre_Alciato(123195361) was o-added to the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Andre_Alciato",
+          "target_player_id": 123195361
+        }
+      },
+      {
+        "id": 11819966,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-17T14:08:22Z",
+        "message": "Andre_Alciato(123195361) was removed from the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Andre_Alciato",
+          "target_player_id": 123195361
+        }
+      },
+      {
+        "id": 11819965,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-17T14:06:09Z",
+        "message": "Andre_Alciato(123195361) was o-added to the faction blacklist by Carlos_Mendoza(28224).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Carlos_Mendoza",
+          "player_id": 28224,
+          "target_player_name": "Andre_Alciato",
+          "target_player_id": 123195361
+        }
+      },
+      {
+        "id": 11819914,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-17T13:51:04Z",
+        "message": "Bernadette_Vadboncoeur(123202371) was added to the faction blacklist by Edward_Floyd(111169) (Reason: TOXIC AS FUCK).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Bernadette_Vadboncoeur",
+          "target_player_id": 123202371,
+          "reason": "TOXIC AS FUCK"
+        }
+      },
+      {
+        "id": 11817435,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-16T19:07:03Z",
+        "message": "Katerino_Petrova(123248271) was added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Katerino_Petrova",
+          "target_player_id": 123248271
+        }
+      },
+      {
+        "id": 11817360,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-16T18:31:26Z",
+        "message": "Enzo_Franzese(123251569) was added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Enzo_Franzese",
+          "target_player_id": 123251569
+        }
+      },
+      {
+        "id": 11815683,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-16T10:46:10Z",
+        "message": "Greely_Tieck(123198691) was removed from the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Greely_Tieck",
+          "target_player_id": 123198691
+        }
+      },
+      {
+        "id": 11807001,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-13T14:47:14Z",
+        "message": "Jimmy_Andolini(123250684) was added to the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Jimmy_Andolini",
+          "target_player_id": 123250684
+        }
+      },
+      {
+        "id": 11803110,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-12T15:19:47Z",
+        "message": "Chloe_Ainsley(123259526) was added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Chloe_Ainsley",
+          "target_player_id": 123259526
+        }
+      },
+      {
+        "id": 11788995,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-09T20:24:14Z",
+        "message": "Dolph_DeTtore(123193210) was added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Dolph_DeTtore",
+          "target_player_id": 123193210
+        }
+      },
+      {
+        "id": 11787993,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-09T15:42:30Z",
+        "message": "Lorenzo_Marcello(123230728) was added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Lorenzo_Marcello",
+          "target_player_id": 123230728
+        }
+      },
+      {
+        "id": 11773817,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-06T14:13:26Z",
+        "message": "David_Addison(123220769) was added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "David_Addison",
+          "target_player_id": 123220769
+        }
+      },
+      {
+        "id": 11764374,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-04T16:45:43Z",
+        "message": "Raki_urra(123255755) was o-added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Raki_urra",
+          "target_player_id": 123255755
+        }
+      },
+      {
+        "id": 11762504,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-03T21:36:28Z",
+        "message": "Lorenzo_Marcello(123230728) was removed from the faction blacklist by Francis_Whittaker(216458).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Francis_Whittaker",
+          "player_id": 216458,
+          "target_player_name": "Lorenzo_Marcello",
+          "target_player_id": 123230728
+        }
+      },
+      {
+        "id": 11756965,
+        "type": "FACTION_BL",
+        "created_at": "2025-08-01T20:31:50Z",
+        "message": "Finn_Kaiser(123183280) was added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Finn_Kaiser",
+          "target_player_id": 123183280
+        }
+      },
+      {
+        "id": 11755252,
+        "type": "FACTION_BL",
+        "created_at": "2025-07-31T19:39:47Z",
+        "message": "Salvatore_Ruiz(123256348) was o-added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Salvatore_Ruiz",
+          "target_player_id": 123256348
+        }
+      },
+      {
+        "id": 11754363,
+        "type": "FACTION_BL",
+        "created_at": "2025-07-31T14:29:09Z",
+        "message": "Salvatore_Ruiz(123256348) was removed from the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Salvatore_Ruiz",
+          "target_player_id": 123256348
+        }
+      },
+      {
+        "id": 11752649,
+        "type": "FACTION_BL",
+        "created_at": "2025-07-30T20:52:32Z",
+        "message": "Alphonse_Moghaddam(123244952) was removed from the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Alphonse_Moghaddam",
+          "target_player_id": 123244952
+        }
+      },
+      {
+        "id": 11733746,
+        "type": "FACTION_BL",
+        "created_at": "2025-07-21T16:53:27Z",
+        "message": "Ryan_Lennox(123188196) was added to the faction blacklist by Castoro_Mangano(123144643).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Castoro_Mangano",
+          "player_id": 123144643,
+          "target_player_name": "Ryan_Lennox",
+          "target_player_id": 123188196
+        }
+      },
+      {
+        "id": 11730176,
+        "type": "FACTION_BL",
+        "created_at": "2025-07-19T14:57:10Z",
+        "message": "Lei_Silenzio(123174333) was added to the faction blacklist by Castoro_Mangano(123144643).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Castoro_Mangano",
+          "player_id": 123144643,
+          "target_player_name": "Lei_Silenzio",
+          "target_player_id": 123174333
+        }
+      },
+      {
+        "id": 11639028,
+        "type": "FACTION_BL",
+        "created_at": "2025-07-14T19:04:34Z",
+        "message": "Italo_Gomorrah(123225399) was o-added to the faction blacklist by Castoro_Mangano(123144643).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Castoro_Mangano",
+          "player_id": 123144643,
+          "target_player_name": "Italo_Gomorrah",
+          "target_player_id": 123225399
+        }
+      },
+      {
+        "id": 11636489,
+        "type": "FACTION_BL",
+        "created_at": "2025-07-14T10:06:05Z",
+        "message": "Rafael_Bucci(123238008) was added to the faction blacklist by Francis_Whittaker(216458).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Francis_Whittaker",
+          "player_id": 216458,
+          "target_player_name": "Rafael_Bucci",
+          "target_player_id": 123238008
+        }
+      },
+      {
+        "id": 11621111,
+        "type": "FACTION_BL",
+        "created_at": "2025-07-11T19:57:40Z",
+        "message": "Eren_Reagan(123171574) was added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Eren_Reagan",
+          "target_player_id": 123171574
+        }
+      },
+      {
+        "id": 11612156,
+        "type": "FACTION_BL",
+        "created_at": "2025-07-08T23:46:11Z",
+        "message": "Domenico_Skorupski(123256348) was added to the faction blacklist by Castoro_Mangano(123144643).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Castoro_Mangano",
+          "player_id": 123144643,
+          "target_player_name": "Domenico_Skorupski",
+          "target_player_id": 123256348
+        }
+      },
+      {
+        "id": 11578603,
+        "type": "FACTION_BL",
+        "created_at": "2025-07-01T16:34:59Z",
+        "message": "Ishak_Reznov(123247976) was removed from the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Ishak_Reznov",
+          "target_player_id": 123247976
+        }
+      },
+      {
+        "id": 11578602,
+        "type": "FACTION_BL",
+        "created_at": "2025-07-01T16:34:25Z",
+        "message": "Javez_Saccone(123219215) was removed from the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Javez_Saccone",
+          "target_player_id": 123219215
+        }
+      },
+      {
+        "id": 11578517,
+        "type": "FACTION_BL",
+        "created_at": "2025-07-01T16:02:52Z",
+        "message": "Karimos_Asbos(123223072) was added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Karimos_Asbos",
+          "target_player_id": 123223072
+        }
+      },
+      {
+        "id": 11576054,
+        "type": "FACTION_BL",
+        "created_at": "2025-06-30T22:16:08Z",
+        "message": "Raphael_Verderaz(123256524) was o-added to the faction blacklist by Castoro_Mangano(123144643).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Castoro_Mangano",
+          "player_id": 123144643,
+          "target_player_name": "Raphael_Verderaz",
+          "target_player_id": 123256524
+        }
+      },
+      {
+        "id": 11575956,
+        "type": "FACTION_BL",
+        "created_at": "2025-06-30T21:19:58Z",
+        "message": "Nathan_Wixx(123244952) was added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Nathan_Wixx",
+          "target_player_id": 123244952
+        }
+      },
+      {
+        "id": 11567384,
+        "type": "FACTION_BL",
+        "created_at": "2025-06-29T08:12:09Z",
+        "message": "Akshay_Gupta(123255389) was added to the faction blacklist by Connell_Duncan(123184221).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Connell_Duncan",
+          "player_id": 123184221,
+          "target_player_name": "Akshay_Gupta",
+          "target_player_id": 123255389
+        }
+      },
+      {
+        "id": 11564276,
+        "type": "FACTION_BL",
+        "created_at": "2025-06-28T20:39:56Z",
+        "message": "Nicolo_Barboza(123198691) was added to the faction blacklist by Castoro_Mangano(123144643).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Castoro_Mangano",
+          "player_id": 123144643,
+          "target_player_name": "Nicolo_Barboza",
+          "target_player_id": 123198691
+        }
+      },
+      {
+        "id": 11548379,
+        "type": "FACTION_BL",
+        "created_at": "2025-06-26T16:48:43Z",
+        "message": "Michael_Bagarella(123127737) was removed from the faction blacklist by Francis_Whittaker(216458).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Francis_Whittaker",
+          "player_id": 216458,
+          "target_player_name": "Michael_Bagarella",
+          "target_player_id": 123127737
+        }
+      },
+      {
+        "id": 11433821,
+        "type": "FACTION_BL",
+        "created_at": "2025-06-04T20:05:26Z",
+        "message": "Romeo_DiFronzo(123124145) was added to the faction blacklist by Francis_Whittaker(216458).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Francis_Whittaker",
+          "player_id": 216458,
+          "target_player_name": "Romeo_DiFronzo",
+          "target_player_id": 123124145
+        }
+      },
+      {
+        "id": 11433820,
+        "type": "FACTION_BL",
+        "created_at": "2025-06-04T20:05:21Z",
+        "message": "Alexander_Piro(123237562) was added to the faction blacklist by Francis_Whittaker(216458).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Francis_Whittaker",
+          "player_id": 216458,
+          "target_player_name": "Alexander_Piro",
+          "target_player_id": 123237562
+        }
+      },
+      {
+        "id": 11380154,
+        "type": "FACTION_BL",
+        "created_at": "2025-05-22T14:50:08Z",
+        "message": "Stu_Sacco(123236672) was o-added to the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Stu_Sacco",
+          "target_player_id": 123236672
+        }
+      },
+      {
+        "id": 11380149,
+        "type": "FACTION_BL",
+        "created_at": "2025-05-22T14:47:30Z",
+        "message": "Stu_Mel(123242440) was o-added to the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Stu_Mel",
+          "target_player_id": 123242440
+        }
+      },
+      {
+        "id": 11375588,
+        "type": "FACTION_BL",
+        "created_at": "2025-05-21T13:34:56Z",
+        "message": "Arkan_Barrs(123251529) was o-added to the faction blacklist by Marcus_Clifford(95784).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Marcus_Clifford",
+          "player_id": 95784,
+          "target_player_name": "Arkan_Barrs",
+          "target_player_id": 123251529
+        }
+      },
+      {
+        "id": 11372209,
+        "type": "FACTION_BL",
+        "created_at": "2025-05-20T20:06:39Z",
+        "message": "Ray_Strozzi(123170149) was removed from the faction blacklist by Tyler_Pixley(204584).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Tyler_Pixley",
+          "player_id": 204584,
+          "target_player_name": "Ray_Strozzi",
+          "target_player_id": 123170149
+        }
+      },
+      {
+        "id": 11372208,
+        "type": "FACTION_BL",
+        "created_at": "2025-05-20T20:05:51Z",
+        "message": "Ray_Strozzi(123170149) was added to the faction blacklist by Tyler_Pixley(204584).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Tyler_Pixley",
+          "player_id": 204584,
+          "target_player_name": "Ray_Strozzi",
+          "target_player_id": 123170149
+        }
+      },
+      {
+        "id": 11367933,
+        "type": "FACTION_BL",
+        "created_at": "2025-05-19T14:59:41Z",
+        "message": "Michael_Bagarella(123127737) was added to the faction blacklist by Marcus_Clifford(95784).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Marcus_Clifford",
+          "player_id": 95784,
+          "target_player_name": "Michael_Bagarella",
+          "target_player_id": 123127737
+        }
+      },
+      {
+        "id": 11308847,
+        "type": "FACTION_BL",
+        "created_at": "2025-05-05T13:25:41Z",
+        "message": "Luca_Vice(123254868) was removed from the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_remove",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Luca_Vice",
+          "target_player_id": 123254868
+        }
+      },
+      {
+        "id": 11294970,
+        "type": "FACTION_BL",
+        "created_at": "2025-05-01T16:44:55Z",
+        "message": "Oshri_Mahluf(123242704) was o-added to the faction blacklist by Marcus_Clifford(95784).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Marcus_Clifford",
+          "player_id": 95784,
+          "target_player_name": "Oshri_Mahluf",
+          "target_player_id": 123242704
+        }
+      },
+      {
+        "id": 11264136,
+        "type": "FACTION_BL",
+        "created_at": "2025-04-20T19:41:26Z",
+        "message": "Dylan_Bear(123230034) was o-added to the faction blacklist by Marcus_Clifford(95784).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Marcus_Clifford",
+          "player_id": 95784,
+          "target_player_name": "Dylan_Bear",
+          "target_player_id": 123230034
+        }
+      },
+      {
+        "id": 11263343,
+        "type": "FACTION_BL",
+        "created_at": "2025-04-20T11:13:19Z",
+        "message": "Brian_Galante(123235351) was o-added to the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Brian_Galante",
+          "target_player_id": 123235351
+        }
+      },
+      {
+        "id": 11255316,
+        "type": "FACTION_BL",
+        "created_at": "2025-04-15T14:17:01Z",
+        "message": "Zhenya_Resnick(123219215) was o-added to the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Zhenya_Resnick",
+          "target_player_id": 123219215
+        }
+      },
+      {
+        "id": 11255258,
+        "type": "FACTION_BL",
+        "created_at": "2025-04-15T13:50:27Z",
+        "message": "Orka_Barrs(123194708) was o-added to the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Orka_Barrs",
+          "target_player_id": 123194708
+        }
+      },
+      {
+        "id": 11255205,
+        "type": "FACTION_BL",
+        "created_at": "2025-04-15T12:56:11Z",
+        "message": "Joe_Falcone(123221613) was added to the faction blacklist by Edward_Floyd(111169).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Edward_Floyd",
+          "player_id": 111169,
+          "target_player_name": "Joe_Falcone",
+          "target_player_id": 123221613
+        }
+      },
+      {
+        "id": 11254994,
+        "type": "FACTION_BL",
+        "created_at": "2025-04-15T09:42:14Z",
+        "message": "Jacob_Martinez(123236433) was o-added to the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Jacob_Martinez",
+          "target_player_id": 123236433
+        }
+      },
+      {
+        "id": 11254993,
+        "type": "FACTION_BL",
+        "created_at": "2025-04-15T09:42:06Z",
+        "message": "Tommy_Barboza(123189431) was o-added to the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Tommy_Barboza",
+          "target_player_id": 123189431
+        }
+      },
+      {
+        "id": 11254603,
+        "type": "FACTION_BL",
+        "created_at": "2025-04-15T07:20:06Z",
+        "message": "Rico_Licata(123253917) was added to the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Rico_Licata",
+          "target_player_id": 123253917
+        }
+      },
+      {
+        "id": 11253911,
+        "type": "FACTION_BL",
+        "created_at": "2025-04-15T02:52:07Z",
+        "message": "Sayo_Ferrari(123230728) was o-added to the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Sayo_Ferrari",
+          "target_player_id": 123230728
+        }
+      },
+      {
+        "id": 11253910,
+        "type": "FACTION_BL",
+        "created_at": "2025-04-15T02:49:48Z",
+        "message": "Pietro_Schiano(123230637) was o-added to the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Pietro_Schiano",
+          "target_player_id": 123230637
+        }
+      },
+      {
+        "id": 11253833,
+        "type": "FACTION_BL",
+        "created_at": "2025-04-15T02:38:26Z",
+        "message": "Ishak_Reznov(123247976) was o-added to the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Ishak_Reznov",
+          "target_player_id": 123247976
+        }
+      },
+      {
+        "id": 11253204,
+        "type": "FACTION_BL",
+        "created_at": "2025-04-14T17:26:01Z",
+        "message": "Raffa_Zemunac(123203362) was o-added to the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Raffa_Zemunac",
+          "target_player_id": 123203362
+        }
+      },
+      {
+        "id": 11253203,
+        "type": "FACTION_BL",
+        "created_at": "2025-04-14T17:25:11Z",
+        "message": "Ten_Falcone(123225490) was o-added to the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Ten_Falcone",
+          "target_player_id": 123225490
+        }
+      },
+      {
+        "id": 11251922,
+        "type": "FACTION_BL",
+        "created_at": "2025-04-14T07:05:56Z",
+        "message": "Rhean_Briones(123254868) was added to the faction blacklist by Parker_Wells(123246869).",
+        "details": {
+          "action": "blacklist_add",
+          "player_name": "Parker_Wells",
+          "player_id": 123246869,
+          "target_player_name": "Rhean_Briones",
+          "target_player_id": 123254868
+        }
+      }
+    ]
+  },
+  "_cache": {
+    "complete": true,
+    "nextPage": 4
+  }
+}
